@@ -134,7 +134,7 @@ app.get('/api/download', (req, res) => {
   const tmpFile = path.join(tmpDir, `dl_${Date.now()}.mp4`);
   const dlName = (filename || 'video').replace(/[^\w가-힣.\-]/g, '_') + '.mp4';
 
-  const fmt = format_id ? `${format_id}+bestaudio/best[ext=mp4]/best` : 'bestvideo+bestaudio/best[ext=mp4]/best';
+  const fmt = format_id ? `${format_id}+bestaudio[ext=m4a]/best` : 'bestvideo[vcodec^=avc][ext=mp4]+bestaudio[ext=m4a]/bestvideo[ext=mp4]+bestaudio/best[ext=mp4]/best';
   const args = ['--merge-output-format', 'mp4', '-f', fmt, '-o', tmpFile, '--no-warnings'];
   if (fs.existsSync(FFMPEG)) args.push('--ffmpeg-location', FFMPEG);
   if (fs.existsSync(COOKIES)) args.push('--cookies', COOKIES);
