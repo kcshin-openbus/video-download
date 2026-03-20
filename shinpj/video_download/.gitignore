@@ -3,7 +3,6 @@ cookies.txt
 tmp/
 yt-dlp
 yt-dlp_linux
+yt-dlp_linux_*
 ffmpeg
 *.bat
-api/debug.php
-test.php
