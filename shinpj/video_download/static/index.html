@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO 기본 -->
+  <title>무료 동영상 다운로더 - YouTube, Instagram, Facebook, TikTok</title>
+  <meta name="description" content="YouTube, Instagram, Facebook, TikTok 영상을 무료로 다운로드하세요. URL만 입력하면 화질별로 간편하게 저장할 수 있습니다.">
+  <meta name="keywords" content="동영상 다운로드, 유튜브 다운로드, 인스타그램 다운로드, 틱톡 다운로드, 페이스북 다운로드, 무료 동영상 저장">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph (카카오톡, 페이스북 공유 시 미리보기) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="무료 동영상 다운로더 - YouTube, Instagram, TikTok">
+  <meta property="og:description" content="YouTube, Instagram, Facebook, TikTok 영상을 무료로 다운로드. URL 입력만으로 간편하게!">
+  <meta property="og:locale" content="ko_KR">
+
+  <!-- JSON-LD 구조화 데이터 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "무료 동영상 다운로더",
+    "description": "YouTube, Instagram, Facebook, TikTok 영상을 무료로 다운로드할 수 있는 서비스",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "All",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" }
+  }
+  </script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 16px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      color: #1a1a2e;
+      margin-bottom: 32px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 700px;
+    }
+
+    /* 탭 */
+    .tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 0;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px 8px 0 0;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      background: #dde1e7;
+      color: #555;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .tab:hover { background: #cdd1d8; }
+    .tab.active { background: #fff; color: #1a1a2e; }
+
+    /* 검색 박스 */
+    .search-box {
+      background: #fff;
+      border-radius: 0 8px 8px 8px;
+      padding: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    .input-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .url-input {
+      flex: 1;
+      padding: 12px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .url-input:focus { border-color: #4a90e2; }
+
+    .find-btn {
+      padding: 12px 24px;
+      background: #4a90e2;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+
+    .find-btn:hover { background: #357abd; }
+    .find-btn:disabled { background: #aaa; cursor: not-allowed; }
+
+    /* 결과 */
+    .result {
+      margin-top: 24px;
+      display: none;
+    }
+
+    .result.show { display: block; }
+
+    .video-card {
+      display: flex;
+      gap: 16px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      align-items: flex-start;
+    }
+
+    .thumbnail {
+      width: 160px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 6px;
+      flex-shrink: 0;
+      background: #ddd;
+    }
+
+    .video-info { flex: 1; }
+
+    .video-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .download-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .dl-btn {
+      padding: 8px 16px;
+      border: 2px solid #4a90e2;
+      background: #fff;
+      color: #4a90e2;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.2s;
+    }
+
+    .dl-btn:hover {
+      background: #4a90e2;
+      color: #fff;
+    }
+
+    .dl-btn.audio {
+      border-color: #e76f51;
+      color: #e76f51;
+    }
+
+    .dl-btn.audio:hover {
+      background: #e76f51;
+      color: #fff;
+    }
+
+    /* 로딩 / 에러 */
+    .status {
+      text-align: center;
+      padding: 16px;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .status.error { color: #e74c3c; }
+
+    .spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #ddd;
+      border-top-color: #4a90e2;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .platform-hint {
+      font-size: 0.8rem;
+      color: #999;
+      margin-top: 8px;
+    }
+
+  </style>
+</head>
+<body>
+  <h1>동영상 다운로더</h1>
+
+  <div class="container">
+    <div class="tabs">
+      <button class="tab active" data-platform="youtube">YouTube</button>
+      <button class="tab" data-platform="instagram">Instagram</button>
+      <button class="tab" data-platform="facebook">Facebook</button>
+      <button class="tab" data-platform="tiktok">TikTok</button>
+    </div>
+
+    <div class="search-box">
+      <div class="input-row">
+        <input
+          type="text"
+          class="url-input"
+          id="urlInput"
+          placeholder="영상 URL을 붙여넣기 하세요"
+        />
+        <button class="find-btn" id="findBtn" onclick="findVideo()">찾기</button>
+      </div>
+      <p class="platform-hint" id="platformHint">YouTube 영상 URL을 입력하세요</p>
+
+
+      <div class="result" id="result">
+        <div class="status" id="statusMsg"></div>
+        <div class="video-card" id="videoCard" style="display:none">
+          <img class="thumbnail" id="thumbnail" src="" alt="썸네일">
+          <div class="video-info">
+            <div class="video-title" id="videoTitle"></div>
+            <div class="download-buttons" id="downloadBtns"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const hints = {
+      youtube: 'YouTube 영상 URL을 입력하세요 (예: https://www.youtube.com/watch?v=...)',
+      instagram: 'Instagram 게시물 URL을 입력하세요',
+      facebook: 'Facebook 영상 URL을 입력하세요',
+      tiktok: 'TikTok 영상 URL을 입력하세요',
+    };
+
+    // 탭별 상태 저장
+    const tabState = { youtube: { url: '', result: null }, instagram: { url: '', result: null }, facebook: { url: '', result: null }, tiktok: { url: '', result: null } };
+    let currentPlatform = 'youtube';
+
+    function saveCurrentState() {
+      tabState[currentPlatform].url = document.getElementById('urlInput').value;
+      tabState[currentPlatform].result = document.getElementById('result').classList.contains('show')
+        ? document.getElementById('result').innerHTML : null;
+    }
+
+    function restoreState(platform) {
+      const state = tabState[platform];
+      document.getElementById('urlInput').value = state.url;
+      const result = document.getElementById('result');
+      if (state.result) {
+        result.innerHTML = state.result;
+        result.classList.add('show');
+      } else {
+        result.classList.remove('show');
+        result.innerHTML = '<div class="status" id="statusMsg"></div><div class="video-card" id="videoCard" style="display:none"><img class="thumbnail" id="thumbnail" src="" alt="썸네일"><div class="video-info"><div class="video-title" id="videoTitle"></div><div class="download-buttons" id="downloadBtns"></div></div></div>';
+      }
+    }
+
+    // 탭 전환
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        saveCurrentState();
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentPlatform = tab.dataset.platform;
+        document.getElementById('platformHint').textContent = hints[currentPlatform];
+        document.getElementById('urlInput').placeholder = hints[currentPlatform];
+restoreState(currentPlatform);
+      });
+    });
+
+    // Enter 키 지원
+    document.getElementById('urlInput').addEventListener('keydown', e => {
+      if (e.key === 'Enter') findVideo();
+    });
+
+    function resetResult() {
+      const result = document.getElementById('result');
+      result.classList.remove('show');
+      document.getElementById('videoCard').style.display = 'none';
+      document.getElementById('statusMsg').textContent = '';
+    }
+
+    function mergeDownload(btn, fmt, origUrl, baseFilename) {
+      const apiBase = location.hostname === 'localhost' ? '/api/download' : 'api/download.php';
+      const params = new URLSearchParams({
+        needs_merge: '1',
+        orig_url: origUrl,
+        format_id: fmt.format_id,
+        filename: baseFilename,
+      });
+      btn.textContent = '처리 중... (영상 길이에 따라 수분 소요)';
+      btn.disabled = true;
+      // popen 스트리밍 — 브라우저가 직접 파일 받음
+      window.location.href = apiBase + '?' + params.toString();
+      setTimeout(() => { btn.textContent = fmt.quality + ' 다운로드'; btn.disabled = false; }, 5000);
+    }
+
+    async function findVideo() {
+      const url = document.getElementById('urlInput').value.trim();
+      if (!url) {
+        alert('URL을 입력해주세요.');
+        return;
+      }
+
+      const findBtn = document.getElementById('findBtn');
+      const result = document.getElementById('result');
+      const statusMsg = document.getElementById('statusMsg');
+      const videoCard = document.getElementById('videoCard');
+
+      findBtn.disabled = true;
+      result.classList.add('show');
+      videoCard.style.display = 'none';
+      statusMsg.innerHTML = '<span class="spinner"></span>영상 정보를 가져오는 중...';
+
+      try {
+        const apiUrl = location.hostname === 'localhost' ? '/api/info' : 'api/info.php';
+        const res = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          statusMsg.className = 'status error';
+          statusMsg.textContent = data.error || '오류가 발생했습니다.';
+          return;
+        }
+
+        statusMsg.textContent = '';
+
+        // 썸네일 & 제목
+        document.getElementById('thumbnail').src = data.thumbnail || '';
+        document.getElementById('videoTitle').textContent = data.title;
+
+        // 다운로드 버튼 생성
+        const btnsEl = document.getElementById('downloadBtns');
+        btnsEl.innerHTML = '';
+
+        if (data.formats && data.formats.length > 0) {
+          data.formats.forEach(fmt => {
+            const filename = `${data.title}_${fmt.quality}`;
+
+            if (fmt.needs_merge) {
+              // 고화질 DASH: 백그라운드 처리 후 다운로드
+              const btn = document.createElement('button');
+              btn.className = 'dl-btn';
+              btn.textContent = fmt.quality + ' 다운로드';
+              btn.addEventListener('click', () => mergeDownload(btn, fmt, data.orig_url, filename));
+              btnsEl.appendChild(btn);
+            } else {
+              // 일반: CDN 직접 다운로드
+              const a = document.createElement('a');
+              a.href = fmt.url;
+              a.target = '_blank';
+              a.rel = 'noopener noreferrer';
+              const btn = document.createElement('button');
+              btn.className = fmt.quality.includes('오디오') ? 'dl-btn audio' : 'dl-btn';
+              btn.textContent = fmt.quality + ' 다운로드';
+              a.appendChild(btn);
+              btnsEl.appendChild(a);
+            }
+          });
+        } else {
+          btnsEl.innerHTML = '<span style="color:#999;font-size:0.85rem">다운로드 가능한 포맷이 없습니다.</span>';
+        }
+
+        videoCard.style.display = 'flex';
+
+      } catch (e) {
+        statusMsg.className = 'status error';
+        statusMsg.textContent = '서버에 연결할 수 없습니다.';
+      } finally {
+        findBtn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>

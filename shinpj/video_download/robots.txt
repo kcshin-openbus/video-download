@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://anisin.dothome.co.kr/sitemap.xml

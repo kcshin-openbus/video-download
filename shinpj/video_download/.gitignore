@@ -1,0 +1,9 @@
+node_modules/
+cookies.txt
+tmp/
+yt-dlp
+yt-dlp_linux
+ffmpeg
+*.bat
+api/debug.php
+test.php
