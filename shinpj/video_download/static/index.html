@@ -124,17 +124,11 @@ function renderResult(data) {
   const thumb   = data.thumbnail ? `<img src="${data.thumbnail}" alt="썸네일" onerror="this.style.display='none'">` : '';
   const formats = data.formats.map(f => {
     const slow = f.needs_merge ? '<span class="format-slow">⚠ 느림</span>' : '';
-    if (f.needs_merge) {
-      const href = `${DL_URL}?orig_url=${encodeURIComponent(data.orig_url)}&format_id=${encodeURIComponent(f.format_id)}&filename=${encodeURIComponent(data.title)}`;
-      return `<a class="format-btn" href="${href}" download>
-        <span><span class="format-quality">${f.quality}</span>${slow}</span>
-        <span class="format-ext">${f.ext}</span>
-      </a>`;
-    }
-    return `<button class="format-btn" onclick="dlDirect('${encodeURIComponent(f.url)}','${encodeURIComponent(data.title+'.'+f.ext)}')">
+    const href = `${DL_URL}?orig_url=${encodeURIComponent(data.orig_url)}&format_id=${encodeURIComponent(f.format_id || '')}&filename=${encodeURIComponent(data.title)}`;
+    return `<a class="format-btn" href="${href}" download>
       <span class="format-quality">${f.quality}</span>
       <span class="format-ext">${f.ext}</span>
-    </button>`;
+    </a>`;
   }).join('');
 
   document.getElementById('resultArea').innerHTML = `

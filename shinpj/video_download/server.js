@@ -123,16 +123,17 @@ app.post('/api/info', (req, res) => {
   });
 });
 
-// 다운로드 API (머지 필요한 고화질)
+// 다운로드 API (모든 포맷 서버 경유 - 오디오 보장)
 app.get('/api/download', (req, res) => {
   const { orig_url, format_id, filename } = req.query;
-  if (!orig_url || !format_id) return res.status(400).send('파라미터 오류');
+  if (!orig_url) return res.status(400).send('파라미터 오류');
 
-  const dlName = (filename || 'video').replace(/[^\w가-힣.\-]/g, '_') + '.mkv';
+  const dlName = (filename || 'video').replace(/[^\w가-힣.\-]/g, '_') + '.mp4';
   res.setHeader('Content-Disposition', `attachment; filename*=UTF-8''${encodeURIComponent(dlName)}`);
-  res.setHeader('Content-Type', 'video/x-matroska');
+  res.setHeader('Content-Type', 'video/mp4');
 
-  const args = ['--merge-output-format', 'mkv', '-f', `${format_id}+bestaudio/best`, '-o', '-'];
+  const fmt = format_id ? `${format_id}+bestaudio/best[ext=mp4]/best` : 'bestvideo+bestaudio/best[ext=mp4]/best';
+  const args = ['--merge-output-format', 'mp4', '-f', fmt, '-o', '-', '--no-warnings'];
   if (fs.existsSync(COOKIES)) args.push('--cookies', COOKIES);
   args.push(orig_url);
 
