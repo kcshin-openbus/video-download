@@ -9,6 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const YTDLP = process.platform === 'win32' ? 'yt-dlp' : './yt-dlp';
+const FFMPEG = path.join(__dirname, process.platform === 'win32' ? 'ffmpeg.exe' : 'ffmpeg');
 const COOKIES = path.join(__dirname, 'cookies.txt');
 
 app.use(express.json());
@@ -123,23 +124,32 @@ app.post('/api/info', (req, res) => {
   });
 });
 
-// 다운로드 API (모든 포맷 서버 경유 - 오디오 보장)
+// 다운로드 API (임시 파일 경유 - 오디오 보장)
 app.get('/api/download', (req, res) => {
   const { orig_url, format_id, filename } = req.query;
   if (!orig_url) return res.status(400).send('파라미터 오류');
 
+  const tmpDir = path.join(__dirname, 'tmp');
+  if (!fs.existsSync(tmpDir)) fs.mkdirSync(tmpDir);
+  const tmpFile = path.join(tmpDir, `dl_${Date.now()}.mp4`);
   const dlName = (filename || 'video').replace(/[^\w가-힣.\-]/g, '_') + '.mp4';
-  res.setHeader('Content-Disposition', `attachment; filename*=UTF-8''${encodeURIComponent(dlName)}`);
-  res.setHeader('Content-Type', 'video/mp4');
 
   const fmt = format_id ? `${format_id}+bestaudio/best[ext=mp4]/best` : 'bestvideo+bestaudio/best[ext=mp4]/best';
-  const args = ['--merge-output-format', 'mp4', '-f', fmt, '-o', '-', '--no-warnings'];
+  const args = ['--merge-output-format', 'mp4', '-f', fmt, '-o', tmpFile, '--no-warnings'];
+  if (fs.existsSync(FFMPEG)) args.push('--ffmpeg-location', FFMPEG);
   if (fs.existsSync(COOKIES)) args.push('--cookies', COOKIES);
   args.push(orig_url);
 
   const proc = spawn(YTDLP, args);
-  proc.stdout.pipe(res);
   proc.stderr.on('data', () => {});
+  proc.on('close', () => {
+    if (!fs.existsSync(tmpFile)) return res.status(500).send('다운로드 실패');
+    res.setHeader('Content-Disposition', `attachment; filename*=UTF-8''${encodeURIComponent(dlName)}`);
+    res.setHeader('Content-Type', 'video/mp4');
+    const stream = fs.createReadStream(tmpFile);
+    stream.pipe(res);
+    stream.on('close', () => fs.unlink(tmpFile, () => {}));
+  });
   req.on('close', () => proc.kill());
 });
 

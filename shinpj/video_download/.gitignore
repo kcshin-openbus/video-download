@@ -6,3 +6,4 @@ yt-dlp_linux
 yt-dlp_linux_*
 ffmpeg
 *.bat
+ffmpeg.exe
