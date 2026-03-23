@@ -1,0 +1,6 @@
+node_modules/
+tmp/
+credentials/token.json
+.env
+*.srt
+*.vtt

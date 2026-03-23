@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>유튜브 설명글 번역기</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', sans-serif; background: #0f0f0f; color: #e8e8e8; min-height: 100vh; }
+
+header {
+  background: #1a1a1a;
+  border-bottom: 1px solid #2a2a2a;
+  padding: 14px 24px;
+  display: flex; align-items: center; gap: 12px;
+}
+.logo { font-size: 18px; font-weight: 700; color: #ff4444; }
+.logo span { color: #e8e8e8; }
+.header-sub { font-size: 12px; color: #666; }
+.auth-area { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+.auth-status { font-size: 12px; }
+.auth-status.ok { color: #4caf50; }
+.auth-status.no { color: #888; }
+.btn-auth { padding: 7px 16px; border-radius: 6px; border: none; cursor: pointer; font-size: 13px; font-weight: 600; background: #ff4444; color: #fff; }
+.btn-auth.connected { background: #1a3a2a; color: #4caf50; border: 1px solid #2a5a3a; cursor: default; }
+
+.container { max-width: 960px; margin: 0 auto; padding: 24px 16px; display: flex; flex-direction: column; gap: 16px; }
+
+.card {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  padding: 20px 24px;
+}
+.card-title {
+  font-size: 14px; font-weight: 700; color: #aaa; text-transform: uppercase;
+  letter-spacing: 0.5px; margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.card-title .num {
+  background: #ff4444; color: #fff;
+  width: 22px; height: 22px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+}
+
+label { font-size: 13px; color: #888; display: block; margin-bottom: 6px; }
+
+input[type="text"], textarea {
+  width: 100%; background: #111; border: 1px solid #333; border-radius: 8px;
+  color: #e8e8e8; padding: 10px 14px; font-size: 14px; font-family: inherit;
+  outline: none; transition: border-color 0.2s; resize: vertical;
+}
+input[type="text"]:focus, textarea:focus { border-color: #ff4444; }
+textarea { min-height: 120px; line-height: 1.6; }
+
+.lang-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.lang-chip {
+  padding: 6px 14px; border-radius: 20px;
+  border: 1px solid #3a3a3a; background: #111; color: #888;
+  cursor: pointer; font-size: 13px; transition: all 0.15s; user-select: none;
+  display: inline-flex; align-items: center; gap: 5px;
+}
+.lang-chip:hover { border-color: #666; color: #ccc; }
+.lang-chip.selected { background: #ff4444; color: #fff; border-color: #ff4444; }
+.lang-chip.top-lang { border-color: #554400; color: #ccaa44; }
+.lang-chip.top-lang:hover { border-color: #998800; color: #ffdd44; }
+.lang-chip.top-lang.selected { background: #ff4444; color: #fff; border-color: #ff4444; }
+.top-badge { font-size: 10px; background: #554400; color: #ffcc00; padding: 1px 5px; border-radius: 4px; font-weight: 700; }
+.lang-chip.selected .top-badge { background: rgba(255,255,255,0.25); color: #fff; }
+.lang-section-label { width: 100%; font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 10px; margin-bottom: 2px; padding-left: 2px; }
+.select-top-btn { font-size: 12px; padding: 5px 12px; border-radius: 6px; border: 1px solid #554400; background: #1a1400; color: #ccaa44; cursor: pointer; }
+.select-top-btn:hover { background: #2a2000; }
+
+.btn {
+  padding: 10px 22px; border-radius: 8px; border: none;
+  cursor: pointer; font-size: 14px; font-weight: 600;
+  transition: opacity 0.2s, transform 0.1s;
+  display: inline-flex; align-items: center; gap: 7px;
+}
+.btn:active { transform: scale(0.97); }
+.btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+.btn-red { background: #ff4444; color: #fff; }
+.btn-green { background: #1a6a3a; color: #fff; }
+.btn-gray { background: #2a2a2a; color: #ccc; border: 1px solid #444; }
+
+.action-row { display: flex; align-items: center; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+
+/* 번역 결과 */
+.orig-box {
+  background: #111; border: 1px solid #333; border-radius: 10px;
+  padding: 16px 18px; margin-bottom: 16px;
+}
+.orig-box .clabel { font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+.orig-box .ctitle { font-size: 15px; font-weight: 700; color: #ff8888; margin-bottom: 6px; }
+.orig-box .cdesc  { font-size: 13px; color: #888; line-height: 1.7; white-space: pre-wrap; }
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 10px;
+}
+.result-card {
+  background: #111; border: 1px solid #2a2a2a; border-radius: 10px;
+  padding: 14px 16px; transition: border-color 0.2s;
+}
+.result-card:hover { border-color: #444; }
+.result-card .clabel {
+  font-size: 11px; color: #666; text-transform: uppercase;
+  letter-spacing: 0.5px; margin-bottom: 8px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.result-card .ctitle { font-size: 14px; font-weight: 600; color: #e8e8e8; margin-bottom: 6px; }
+.result-card .cdesc {
+  font-size: 12px; color: #aaa; line-height: 1.6; white-space: pre-wrap;
+  max-height: 120px; overflow: hidden; position: relative;
+}
+.result-card .cdesc.expanded { max-height: none; }
+.expand-btn {
+  font-size: 11px; color: #ff4444; cursor: pointer; background: none;
+  border: none; padding: 4px 0; margin-top: 4px; display: block;
+}
+.copy-btn {
+  font-size: 11px; color: #888; cursor: pointer; background: #1a1a1a;
+  border: 1px solid #333; border-radius: 4px; padding: 2px 8px;
+}
+.copy-btn:hover { color: #ccc; border-color: #555; }
+
+/* 영상 ID 입력 + 적용 */
+.video-id-row { display: flex; gap: 8px; }
+.video-id-row input { flex: 1; }
+
+.apply-result {
+  margin-top: 12px; background: #111; border: 1px solid #2a2a2a;
+  border-radius: 8px; padding: 14px; display: none;
+}
+.apply-item { display: flex; align-items: center; gap: 8px; padding: 5px 0; font-size: 13px; }
+.badge { padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+.badge-ok { background: #1a3a2a; color: #4caf50; }
+.badge-fail { background: #3a1a1a; color: #f66; }
+
+.spinner {
+  width: 16px; height: 16px;
+  border: 2px solid #444; border-top-color: #ff4444;
+  border-radius: 50%; animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.toast {
+  position: fixed; bottom: 24px; right: 24px;
+  background: #222; border: 1px solid #444; border-radius: 10px;
+  padding: 12px 20px; font-size: 13px; z-index: 999;
+  max-width: 320px; pointer-events: none;
+  transform: translateY(60px); opacity: 0; transition: all 0.3s;
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast.error { border-color: #f44; color: #f88; }
+.toast.success { border-color: #4caf50; color: #8bc34a; }
+
+.hint { font-size: 12px; color: #555; margin-top: 8px; }
+.hidden { display: none !important; }
+.section-gap { margin-top: 14px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo">▶ YouTube<span> 설명글 번역기</span></div>
+    <div class="header-sub">한국어 제목·설명 → 다국어 자동 번역 → 유튜브 자동 적용</div>
+  </div>
+  <div class="auth-area">
+    <span class="auth-status no" id="authStatus">● 미연결</span>
+    <button class="btn-auth" id="authBtn" onclick="handleAuth()">YouTube 로그인</button>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- STEP 1: 원문 입력 -->
+  <div class="card">
+    <div class="card-title"><span class="num">1</span> 한국어 제목 / 설명글 입력</div>
+    <label>영상 제목</label>
+    <input type="text" id="inputTitle" placeholder="유튜브 영상 제목을 입력하세요" />
+    <div class="section-gap"></div>
+    <label>영상 설명글</label>
+    <textarea id="inputDesc" placeholder="유튜브 영상 설명글을 입력하세요&#10;&#10;링크, 해시태그 등도 그대로 입력하세요."></textarea>
+    <p class="hint">※ URL, 해시태그, 고유명사 등 번역이 필요 없는 부분도 그대로 입력하면 됩니다.</p>
+  </div>
+
+  <!-- STEP 2: 언어 선택 + 번역 -->
+  <div class="card">
+    <div class="card-title"><span class="num">2</span> 번역 언어 선택</div>
+    <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;align-items:center;">
+      <button class="select-top-btn" onclick="selectTopLangs()">⭐ 핵심 언어만 선택</button>
+      <button class="select-top-btn" style="border-color:#333;background:#1a1a1a;color:#aaa;" onclick="selectAllLangs()">전체 선택</button>
+      <button class="select-top-btn" style="border-color:#333;background:#111;color:#666;" onclick="clearLangs()">전체 해제</button>
+      <span style="font-size:12px;color:#555;">⭐ = 세계 인구 95% 커버 언어</span>
+    </div>
+    <div class="lang-grid" id="langGrid"></div>
+    <div class="action-row">
+      <button class="btn btn-red" id="translateBtn" onclick="doTranslate()">번역 시작</button>
+      <span id="translateStatus" style="font-size:13px;color:#888;"></span>
+    </div>
+  </div>
+
+  <!-- STEP 3: 번역 결과 확인 -->
+  <div class="card hidden" id="step3">
+    <div class="card-title" style="justify-content:space-between;">
+      <span><span class="num">3</span> 번역 결과 확인</span>
+      <span id="resultCount" style="font-size:12px;color:#555;font-weight:400;"></span>
+    </div>
+    <div id="origBox"></div>
+    <div class="result-grid" id="resultGrid"></div>
+  </div>
+
+  <!-- STEP 4: 유튜브 적용 -->
+  <div class="card hidden" id="step4">
+    <div class="card-title"><span class="num">4</span> 유튜브 영상에 적용</div>
+    <label>유튜브 영상 ID</label>
+    <div class="video-id-row">
+      <input type="text" id="videoIdInput" placeholder="예) dQw4w9WgXcQ  (URL에서 v= 뒤 값)" />
+      <button class="btn btn-gray" onclick="previewVideo()">영상 확인</button>
+    </div>
+    <p class="hint">유튜브 영상 URL: youtube.com/watch?v=<b style="color:#ff8888">dQw4w9WgXcQ</b> → 이 부분이 영상 ID입니다.</p>
+    <div id="videoPreview" class="hint section-gap" style="color:#4caf50;"></div>
+    <div class="action-row" style="margin-top:20px;">
+      <button class="btn btn-green" id="applyBtn" onclick="doApply()" style="font-size:15px;padding:12px 28px;">
+        ▲ 유튜브에 다국어 설명 적용
+      </button>
+      <span id="applyStatus" style="font-size:13px;color:#888;"></span>
+    </div>
+    <div class="apply-result" id="applyResult"></div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// top: true = 세계 인구 95% 커버 핵심 언어
+const LANGS = [
+  // 동아시아
+  { code: 'en',     label: '🇺🇸 영어',              top: true },
+  { code: 'en-GB',  label: '🇬🇧 영어 (영국)',         top: false },
+  { code: 'ja',     label: '🇯🇵 일본어',              top: true },
+  { code: 'zh-CN',  label: '🇨🇳 중국어 간체',          top: true },
+  { code: 'zh-TW',  label: '🇹🇼 중국어 번체',          top: true },
+  { code: 'zh-HK',  label: '🇭🇰 중국어 (홍콩)',        top: false },
+  // 동남아시아
+  { code: 'vi',     label: '🇻🇳 베트남어',             top: true },
+  { code: 'th',     label: '🇹🇭 태국어',              top: true },
+  { code: 'id',     label: '🇮🇩 인도네시아어',          top: true },
+  { code: 'ms',     label: '🇲🇾 말레이어',             top: false },
+  { code: 'fil',    label: '🇵🇭 필리핀어',             top: false },
+  { code: 'my',     label: '🇲🇲 미얀마어',             top: false },
+  { code: 'km',     label: '🇰🇭 크메르어',             top: false },
+  { code: 'lo',     label: '🇱🇦 라오어',              top: false },
+  { code: 'si',     label: '🇱🇰 싱할라어',             top: false },
+  // 남아시아
+  { code: 'hi',     label: '🇮🇳 힌디어',              top: true },
+  { code: 'bn',     label: '🇧🇩 벵골어',              top: true },
+  { code: 'ur',     label: '🇵🇰 우르두어',             top: true },
+  { code: 'ta',     label: '🇮🇳 타밀어',              top: false },
+  { code: 'te',     label: '🇮🇳 텔루구어',             top: false },
+  { code: 'mr',     label: '🇮🇳 마라티어',             top: false },
+  { code: 'gu',     label: '🇮🇳 구자라트어',            top: false },
+  { code: 'kn',     label: '🇮🇳 칸나다어',             top: false },
+  { code: 'ml',     label: '🇮🇳 말라얄람어',            top: false },
+  { code: 'pa',     label: '🇮🇳 펀자브어',             top: false },
+  { code: 'ne',     label: '🇳🇵 네팔어',              top: false },
+  // 서아시아 / 중동
+  { code: 'ar',     label: '🇸🇦 아랍어',              top: true },
+  { code: 'fa',     label: '🇮🇷 페르시아어',            top: true },
+  { code: 'he',     label: '🇮🇱 히브리어',             top: false },
+  { code: 'tr',     label: '🇹🇷 터키어',              top: true },
+  { code: 'az',     label: '🇦🇿 아제르바이잔어',         top: false },
+  { code: 'hy',     label: '🇦🇲 아르메니아어',           top: false },
+  { code: 'ka',     label: '🇬🇪 조지아어',             top: false },
+  { code: 'uz',     label: '🇺🇿 우즈베크어',            top: false },
+  { code: 'kk',     label: '🇰🇿 카자흐어',             top: false },
+  { code: 'ky',     label: '🇰🇬 키르기스어',            top: false },
+  { code: 'mn',     label: '🇲🇳 몽골어',              top: false },
+  // 서유럽
+  { code: 'es',     label: '🇪🇸 스페인어',             top: true },
+  { code: 'es-419', label: '🌎 스페인어 (중남미)',        top: false },
+  { code: 'fr',     label: '🇫🇷 프랑스어',             top: true },
+  { code: 'fr-CA',  label: '🇨🇦 프랑스어 (캐나다)',      top: false },
+  { code: 'de',     label: '🇩🇪 독일어',              top: true },
+  { code: 'it',     label: '🇮🇹 이탈리아어',            top: true },
+  { code: 'pt',     label: '🇧🇷 포르투갈어 (브라질)',     top: true },
+  { code: 'pt-PT',  label: '🇵🇹 포르투갈어 (포르투갈)',   top: false },
+  { code: 'nl',     label: '🇳🇱 네덜란드어',            top: false },
+  { code: 'sv',     label: '🇸🇪 스웨덴어',             top: false },
+  { code: 'da',     label: '🇩🇰 덴마크어',             top: false },
+  { code: 'fi',     label: '🇫🇮 핀란드어',             top: false },
+  { code: 'no',     label: '🇳🇴 노르웨이어',            top: false },
+  { code: 'is',     label: '🇮🇸 아이슬란드어',           top: false },
+  { code: 'eu',     label: '바스크어',                 top: false },
+  { code: 'ca',     label: '카탈로니아어',               top: false },
+  { code: 'gl',     label: '갈리시아어',                top: false },
+  // 동유럽
+  { code: 'ru',     label: '🇷🇺 러시아어',             top: true },
+  { code: 'uk',     label: '🇺🇦 우크라이나어',           top: false },
+  { code: 'pl',     label: '🇵🇱 폴란드어',             top: false },
+  { code: 'cs',     label: '🇨🇿 체코어',              top: false },
+  { code: 'sk',     label: '🇸🇰 슬로바키아어',           top: false },
+  { code: 'hu',     label: '🇭🇺 헝가리어',             top: false },
+  { code: 'ro',     label: '🇷🇴 루마니아어',            top: false },
+  { code: 'bg',     label: '🇧🇬 불가리아어',            top: false },
+  { code: 'sr',     label: '🇷🇸 세르비아어',            top: false },
+  { code: 'hr',     label: '🇭🇷 크로아티아어',           top: false },
+  { code: 'sl',     label: '🇸🇮 슬로베니아어',           top: false },
+  { code: 'bs',     label: '🇧🇦 보스니아어',            top: false },
+  { code: 'mk',     label: '🇲🇰 마케도니아어',           top: false },
+  { code: 'sq',     label: '🇦🇱 알바니아어',            top: false },
+  { code: 'el',     label: '🇬🇷 그리스어',             top: false },
+  { code: 'lt',     label: '🇱🇹 리투아니아어',           top: false },
+  { code: 'lv',     label: '🇱🇻 라트비아어',            top: false },
+  { code: 'et',     label: '🇪🇪 에스토니아어',           top: false },
+  { code: 'be',     label: '🇧🇾 벨라루스어',            top: false },
+  // 아프리카
+  { code: 'sw',     label: '🌍 스와힐리어',             top: false },
+  { code: 'am',     label: '🇪🇹 암하라어',             top: false },
+  { code: 'af',     label: '🇿🇦 아프리칸스어',           top: false },
+  { code: 'zu',     label: '🇿🇦 줄루어',              top: false },
+];
+
+let translations = {};
+let activeLang = '';
+
+// ── 초기화 ────────────────────────────────────────────────
+function init() {
+  // 언어 선택 칩
+  document.getElementById('langGrid').innerHTML = LANGS.map(l =>
+    `<div class="lang-chip ${l.top ? 'top-lang' : ''}" id="chip_${l.code}" onclick="toggleLang('${l.code}')">
+      ${l.label}${l.top ? '<span class="top-badge">⭐</span>' : ''}
+    </div>`
+  ).join('');
+
+  checkAuth();
+
+  const p = new URLSearchParams(location.search);
+  if (p.get('auth') === 'success') { toast('YouTube 인증 완료!', 'success'); history.replaceState({}, '', '/'); }
+  if (p.get('auth') === 'fail')    { toast('YouTube 인증 실패. 다시 시도해주세요.', 'error'); history.replaceState({}, '', '/'); }
+}
+
+// ── 인증 ─────────────────────────────────────────────────
+async function checkAuth() {
+  const res = await fetch('/api/auth/status').then(r => r.json());
+  const statusEl = document.getElementById('authStatus');
+  const btnEl = document.getElementById('authBtn');
+  if (res.authorized) {
+    statusEl.textContent = '● 연결됨'; statusEl.className = 'auth-status ok';
+    btnEl.textContent = '✓ 연결됨'; btnEl.className = 'btn-auth connected';
+    btnEl.onclick = null;
+  } else {
+    statusEl.textContent = '● 미연결'; statusEl.className = 'auth-status no';
+    btnEl.textContent = 'YouTube 로그인'; btnEl.className = 'btn-auth';
+    btnEl.onclick = handleAuth;
+  }
+}
+
+function handleAuth() { window.location.href = '/api/auth/login'; }
+
+// ── 언어 토글 ─────────────────────────────────────────────
+function toggleLang(code) {
+  document.getElementById('chip_' + code)?.classList.toggle('selected');
+}
+function selectedLangs() {
+  return LANGS.map(l => l.code).filter(c => document.getElementById('chip_' + c)?.classList.contains('selected'));
+}
+function selectTopLangs() {
+  LANGS.forEach(l => {
+    const el = document.getElementById('chip_' + l.code);
+    if (l.top) el?.classList.add('selected');
+    else el?.classList.remove('selected');
+  });
+}
+function selectAllLangs() {
+  LANGS.forEach(l => document.getElementById('chip_' + l.code)?.classList.add('selected'));
+}
+function clearLangs() {
+  LANGS.forEach(l => document.getElementById('chip_' + l.code)?.classList.remove('selected'));
+}
+
+// ── STEP 2: 번역 ──────────────────────────────────────────
+async function doTranslate() {
+  const title = document.getElementById('inputTitle').value.trim();
+  const desc  = document.getElementById('inputDesc').value.trim();
+  const langs = selectedLangs();
+
+  if (!desc) { toast('설명글을 입력해주세요.', 'error'); return; }
+  if (!langs.length) { toast('번역 언어를 선택해주세요.', 'error'); return; }
+
+  setLoading('translateBtn', true, '번역 중...');
+  try {
+    const res = await fetch('/api/translate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title, description: desc, target_langs: langs })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+
+    translations = data;
+    activeLang = langs[0];
+
+    renderResults(title, desc);
+    show('step3'); show('step4');
+    toast('번역 완료!', 'success');
+    setTimeout(() => document.getElementById('step3').scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+  } catch (err) {
+    toast(err.message, 'error');
+  } finally {
+    setLoading('translateBtn', false);
+  }
+}
+
+// ── STEP 3: 결과 렌더링 ───────────────────────────────────
+function renderResults(origTitle, origDesc) {
+  const langs = Object.keys(translations);
+
+  // 원문 박스
+  document.getElementById('origBox').innerHTML = `
+    <div class="orig-box">
+      <div class="clabel">원문 (한국어)</div>
+      <div class="ctitle">${esc(origTitle || '(제목 없음)')}</div>
+      <div class="cdesc">${esc(origDesc)}</div>
+    </div>`;
+
+  // 언어 수 표시
+  document.getElementById('resultCount').textContent = `${langs.length}개 언어`;
+
+  // 결과 그리드
+  document.getElementById('resultGrid').innerHTML = langs.map(code => {
+    const t = translations[code];
+    const l = LANGS.find(x => x.code === code);
+    const label = l ? l.label : code;
+    const isLong = (t.description || '').length > 150;
+    return `
+      <div class="result-card">
+        <div class="clabel">
+          <span>${label}</span>
+          <button class="copy-btn" onclick="copyCard('${code}')">복사</button>
+        </div>
+        <div class="ctitle">${esc(t.title || '')}</div>
+        <div class="cdesc" id="desc_${code}">${esc(t.description || '')}</div>
+        ${isLong ? `<button class="expand-btn" id="exp_${code}" onclick="toggleExpand('${code}')">▼ 더 보기</button>` : ''}
+      </div>`;
+  }).join('');
+}
+
+function toggleExpand(code) {
+  const desc = document.getElementById('desc_' + code);
+  const btn  = document.getElementById('exp_' + code);
+  const expanded = desc.classList.toggle('expanded');
+  btn.textContent = expanded ? '▲ 접기' : '▼ 더 보기';
+}
+
+function copyCard(code) {
+  const t = translations[code];
+  const text = `${t.title || ''}\n\n${t.description || ''}`.trim();
+  navigator.clipboard.writeText(text).then(() => toast('복사됨!', 'success'));
+}
+
+// ── STEP 4: 영상 확인 ─────────────────────────────────────
+async function previewVideo() {
+  const videoId = document.getElementById('videoIdInput').value.trim();
+  if (!videoId) { toast('영상 ID를 입력해주세요.', 'error'); return; }
+
+  const auth = await fetch('/api/auth/status').then(r => r.json());
+  if (!auth.authorized) { toast('YouTube 로그인이 필요합니다.', 'error'); return; }
+
+  try {
+    const res = await fetch(`/api/video/${videoId}`);
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+    document.getElementById('videoPreview').textContent = `✓ "${data.title}" 영상 확인됨`;
+  } catch (err) {
+    document.getElementById('videoPreview').textContent = '';
+    toast(err.message, 'error');
+  }
+}
+
+// ── STEP 4: 유튜브 적용 ───────────────────────────────────
+async function doApply() {
+  const videoId = document.getElementById('videoIdInput').value.trim();
+  if (!videoId) { toast('영상 ID를 입력해주세요.', 'error'); return; }
+  if (!Object.keys(translations).length) { toast('먼저 번역을 완료해주세요.', 'error'); return; }
+
+  const auth = await fetch('/api/auth/status').then(r => r.json());
+  if (!auth.authorized) { toast('YouTube 로그인이 필요합니다.', 'error'); return; }
+
+  setLoading('applyBtn', true, '적용 중...');
+  try {
+    const res = await fetch('/api/apply', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ video_id: videoId, localizations: translations })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+
+    renderApplyResult(data.applied);
+    toast(`${data.applied.length}개 언어 적용 완료!`, 'success');
+  } catch (err) {
+    toast(err.message, 'error');
+  } finally {
+    setLoading('applyBtn', false);
+  }
+}
+
+function renderApplyResult(applied) {
+  const el = document.getElementById('applyResult');
+  el.style.display = 'block';
+  el.innerHTML = `<div style="font-size:13px;color:#888;margin-bottom:8px;">적용 결과</div>` +
+    applied.map(code => {
+      const l = LANGS.find(x => x.code === code);
+      return `<div class="apply-item"><span class="badge badge-ok">✓ 완료</span>${l ? l.label : code}</div>`;
+    }).join('');
+}
+
+// ── 유틸 ──────────────────────────────────────────────────
+function show(id) { document.getElementById(id)?.classList.remove('hidden'); }
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>'); }
+
+function setLoading(btnId, on, msg = '') {
+  const btn = document.getElementById(btnId);
+  if (!btn) return;
+  btn.disabled = on;
+  if (on) {
+    btn.dataset.orig = btn.innerHTML;
+    btn.innerHTML = `<span class="spinner"></span> ${msg}`;
+  } else {
+    btn.innerHTML = btn.dataset.orig || btn.innerHTML;
+  }
+}
+
+let toastTimer;
+function toast(msg, type = '') {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.className = `toast show ${type}`;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 3500);
+}
+
+init();
+</script>
+</body>
+</html>
