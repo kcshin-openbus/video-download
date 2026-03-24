@@ -60,6 +60,7 @@ async function getVideoInfo(videoId) {
     title: item.snippet.title,
     description: item.snippet.description,
     defaultLanguage: item.snippet.defaultLanguage || 'ko',
+    categoryId: item.snippet.categoryId || '22',
     localizations: item.localizations || {}
   };
 }
@@ -81,9 +82,15 @@ async function applyLocalizations(videoId, localizations) {
   }
 
   const res = await youtube.videos.update({
-    part: ['localizations'],
+    part: ['snippet', 'localizations'],
     requestBody: {
       id: videoId,
+      snippet: {
+        title: existing.title,
+        description: existing.description,
+        defaultLanguage: existing.defaultLanguage || 'ko',
+        categoryId: existing.categoryId || '22'
+      },
       localizations: merged
     }
   });
