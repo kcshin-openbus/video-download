@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌍 해외 급상승 쇼츠</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <a href="/" class="back-btn">← 메인으로</a>
+    <div>
+      <h1>🌍 해외 급상승 쇼츠</h1>
+      <p>각국 YouTube 급상승 쇼츠 실시간 모아보기</p>
+    </div>
+    <button class="theme-toggle" id="theme-toggle">☀️ 라이트 모드</button>
+  </header>
+
+  <main>
+    <!-- 국가 선택 -->
+    <div class="region-tabs">
+      <button class="region-btn" data-region="KR" data-label="🇰🇷 한국">🇰🇷 한국</button>
+      <button class="region-btn active" data-region="US" data-label="🇺🇸 미국">🇺🇸 미국</button>
+      <button class="region-btn" data-region="JP" data-label="🇯🇵 일본">🇯🇵 일본</button>
+      <button class="region-btn" data-region="GB" data-label="🇬🇧 영국">🇬🇧 영국</button>
+      <button class="region-btn" data-region="FR" data-label="🇫🇷 프랑스">🇫🇷 프랑스</button>
+      <button class="region-btn" data-region="DE" data-label="🇩🇪 독일">🇩🇪 독일</button>
+      <button class="region-btn" data-region="BR" data-label="🇧🇷 브라질">🇧🇷 브라질</button>
+      <button class="region-btn" data-region="IN" data-label="🇮🇳 인도">🇮🇳 인도</button>
+      <button class="region-btn" data-region="AU" data-label="🇦🇺 호주">🇦🇺 호주</button>
+      <button class="region-btn" data-region="MX" data-label="🇲🇽 멕시코">🇲🇽 멕시코</button>
+      <button class="region-btn" data-region="ID" data-label="🇮🇩 인도네시아">🇮🇩 인도네시아</button>
+      <button class="region-btn" data-region="ES" data-label="🇪🇸 스페인">🇪🇸 스페인</button>
+    </div>
+
+    <!-- 분야 필터 -->
+    <div class="shorts-filter-row">
+      <span class="filter-label">분야:</span>
+      <div class="shorts-cat-tabs">
+        <button class="scat-btn active" data-cat="">전체</button>
+        <button class="scat-btn" data-cat="10">음악</button>
+        <button class="scat-btn" data-cat="20">게임</button>
+        <button class="scat-btn" data-cat="17">스포츠</button>
+        <button class="scat-btn" data-cat="24">엔터</button>
+        <button class="scat-btn" data-cat="28">과학/기술</button>
+        <button class="scat-btn" data-cat="22">브이로그</button>
+      </div>
+    </div>
+
+    <div id="shorts-meta" class="shorts-meta"></div>
+    <div id="loading" class="loading" style="display:none">불러오는 중...</div>
+    <div id="shorts-grid" class="shorts-grid"></div>
+  </main>
+
+  <script src="app.js"></script>
+  <script>
+    loadTrendingShorts();
+  </script>
+</body>
+</html>

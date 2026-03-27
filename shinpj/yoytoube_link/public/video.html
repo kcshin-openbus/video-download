@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>영상 상세 분석</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <header>
+    <a id="back-btn" href="/" class="back-btn">← 목록으로</a>
+    <h1>영상 상세 분석</h1>
+    <button class="theme-toggle" id="theme-toggle">☀️ 라이트 모드</button>
+  </header>
+
+  <main>
+    <div id="loading" class="loading">분석 중...</div>
+    <div id="video-detail" class="video-detail" style="display:none">
+      <div class="video-top">
+        <img id="v-thumbnail" src="" alt="썸네일">
+        <div class="video-info">
+          <h2 id="v-title"></h2>
+          <p id="v-channel" class="channel-name"></p>
+          <p id="v-published" class="published-date"></p>
+          <a id="v-link" href="#" target="_blank" class="watch-btn">▶ YouTube에서 보기</a>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">조회수</div>
+          <div id="v-views" class="stat-value"></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">좋아요</div>
+          <div id="v-likes" class="stat-value"></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">댓글 수</div>
+          <div id="v-comments" class="stat-value"></div>
+        </div>
+        <div class="stat-card highlight">
+          <div class="stat-label">좋아요율</div>
+          <div id="v-like-rate" class="stat-value"></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">채널 구독자</div>
+          <div id="v-subscribers" class="stat-value"></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">영상 길이</div>
+          <div id="v-duration" class="stat-value"></div>
+        </div>
+        <div class="stat-card highlight">
+          <div class="stat-label">분당 평균 조회수</div>
+          <div id="v-views-per-min" class="stat-value"></div>
+          <div class="stat-note">업로드 이후 평균</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">업로드 후 경과</div>
+          <div id="v-days" class="stat-value"></div>
+        </div>
+        <div class="stat-card highlight">
+          <div class="stat-label">하루 평균 조회수</div>
+          <div id="v-daily-views" class="stat-value"></div>
+        </div>
+      </div>
+
+      <!-- 차트 영역 -->
+      <h3 class="section-title" style="margin-top:40px">📊 통계 시각화</h3>
+      <div class="charts-wrap">
+        <div class="chart-box">
+          <div class="chart-title">조회수 · 좋아요 · 댓글 비교</div>
+          <canvas id="chart-bar"></canvas>
+        </div>
+        <div class="chart-box">
+          <div class="chart-title">좋아요율 게이지</div>
+          <canvas id="chart-gauge"></canvas>
+          <div id="gauge-label" class="gauge-label"></div>
+        </div>
+      </div>
+
+      <h3 class="section-title" style="margin-top:40px">👍 인기 댓글 TOP 10</h3>
+      <div id="comments-loading" class="loading" style="padding:20px">댓글 불러오는 중...</div>
+      <div id="comments-list" class="comments-list" style="display:none"></div>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+  <script>
+    loadVideoDetail();
+  </script>
+</body>
+</html>

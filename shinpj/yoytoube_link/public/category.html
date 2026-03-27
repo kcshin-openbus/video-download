@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>분야별 인기 영상</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <a href="/" class="back-btn">← 메인으로</a>
+    <h1 id="category-title">분야별 인기 영상</h1>
+    <button class="theme-toggle" id="theme-toggle">☀️ 라이트 모드</button>
+  </header>
+
+  <main>
+    <div class="period-bar">
+      <button class="period-btn active" data-period="all">전체</button>
+      <button class="period-btn" data-period="daily">일간</button>
+      <button class="period-btn" data-period="weekly">주간</button>
+      <button class="period-btn" data-period="monthly">월간</button>
+      <button class="period-btn" data-period="yearly">연간</button>
+    </div>
+    <div class="filter-row">
+      <div class="vtype-toggle">
+        <button class="vtype-btn active" data-vtype="all">전체</button>
+        <button class="vtype-btn" data-vtype="shorts">⚡ 쇼츠</button>
+        <button class="vtype-btn" data-vtype="long">🎬 일반영상</button>
+      </div>
+      <div class="sort-bar">
+        <span>정렬:</span>
+        <button class="sort-btn active" data-order="viewCount">조회수</button>
+        <button class="sort-btn" data-order="rating">좋아요</button>
+        <button class="sort-btn" data-order="date">최신순</button>
+      </div>
+    </div>
+
+    <div id="loading" class="loading">불러오는 중...</div>
+    <div id="video-list" class="video-list"></div>
+    <div id="load-more-wrap" class="load-more-wrap" style="display:none">
+      <button id="load-more-btn" class="load-more-btn">더보기</button>
+      <span id="video-count" class="video-count"></span>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+  <script>
+    loadCategory();
+  </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>채널 분석</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <header>
+    <a href="/" class="back-btn">← 메인으로</a>
+    <h1>채널 분석</h1>
+    <button class="theme-toggle" id="theme-toggle">☀️ 라이트 모드</button>
+  </header>
+
+  <main>
+    <div id="loading" class="loading">분석 중...</div>
+
+    <div id="channel-detail" style="display:none">
+      <div id="channel-banner" class="channel-banner"></div>
+
+      <div class="channel-top">
+        <img id="ch-thumbnail" src="" alt="">
+        <div class="channel-info">
+          <h2 id="ch-title"></h2>
+          <p id="ch-desc" class="ch-desc"></p>
+          <p id="ch-since" class="ch-since"></p>
+          <a id="ch-link" href="#" target="_blank" class="watch-btn">▶ YouTube 채널 보기</a>
+        </div>
+      </div>
+
+      <div class="stats-grid" style="margin-bottom:40px">
+        <div class="stat-card highlight">
+          <div class="stat-label">구독자</div>
+          <div id="ch-subscribers" class="stat-value"></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">총 조회수</div>
+          <div id="ch-views" class="stat-value"></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">업로드 영상 수</div>
+          <div id="ch-video-count" class="stat-value"></div>
+        </div>
+        <div class="stat-card highlight">
+          <div class="stat-label">영상 평균 조회수</div>
+          <div id="ch-avg-views" class="stat-value"></div>
+        </div>
+      </div>
+
+      <!-- 인기 영상 조회수 차트 -->
+      <h3 class="section-title">📊 인기 영상 조회수 TOP 12</h3>
+      <div class="chart-box chart-box-wide">
+        <canvas id="chart-channel-views"></canvas>
+      </div>
+
+      <h3 class="section-title" style="margin-top:40px">인기 영상 TOP 12</h3>
+      <div id="ch-video-list" class="video-list"></div>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+  <script>
+    loadChannelDetail();
+  </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>검색 결과</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <a href="/" class="back-btn">← 메인으로</a>
+    <div class="search-header-wrap">
+      <div class="search-type-toggle">
+        <button class="search-type-btn" data-type="channel" id="type-channel">📺 채널</button>
+        <button class="search-type-btn" data-type="video"   id="type-video">🎬 영상</button>
+      </div>
+      <input id="search-input" type="text" class="channel-search-input" placeholder="검색어 입력...">
+      <button id="search-btn" class="channel-search-btn">검색</button>
+    </div>
+    <button class="theme-toggle" id="theme-toggle">☀️ 라이트 모드</button>
+  </header>
+
+  <main>
+    <div id="vtype-wrap" class="filter-row" style="display:none">
+      <div class="vtype-toggle">
+        <button class="vtype-btn active" data-vtype="all">전체</button>
+        <button class="vtype-btn" data-vtype="shorts">⚡ 쇼츠</button>
+        <button class="vtype-btn" data-vtype="long">🎬 일반영상</button>
+      </div>
+    </div>
+    <div id="search-meta" class="search-meta" style="display:none"></div>
+    <div id="loading" class="loading" style="display:none">검색 중...</div>
+    <div id="search-results"></div>
+  </main>
+
+  <script src="app.js"></script>
+  <script>
+    initSearchPage();
+  </script>
+</body>
+</html>
