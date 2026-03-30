@@ -573,20 +573,21 @@ app.get('/api/channel/:id', async (req, res) => {
   }
 });
 
-// 국가별 언어 + 검색 키워드 매핑
-const REGION_META = {
-  KR: { lang: 'ko', q: '쇼츠 인기' },
-  US: { lang: 'en', q: 'shorts trending america' },
-  JP: { lang: 'ja', q: 'ショート 急上昇' },
-  GB: { lang: 'en', q: 'shorts trending uk britain' },
-  FR: { lang: 'fr', q: 'shorts tendance france' },
-  DE: { lang: 'de', q: 'shorts trending deutschland' },
-  BR: { lang: 'pt', q: 'shorts viral brasil' },
-  IN: { lang: 'hi', q: 'shorts viral india' },
-  AU: { lang: 'en', q: 'shorts trending australia' },
-  MX: { lang: 'es', q: 'shorts viral mexico' },
-  ES: { lang: 'es', q: 'shorts viral españa' },
-  ID: { lang: 'id', q: 'shorts viral indonesia' },
+// 언어별 메타 (relevanceLang: API 파라미터, regionCode: mostPopular 기준 국가)
+// langFilter: 고유 문자 보유 언어만 설정 (제목/채널명 검증용)
+const LANG_META = {
+  ko: { name: '한국어',    relevanceLang: 'ko', regionCode: 'KR', q: '쇼츠',          langFilter: /[\uAC00-\uD7A3\u1100-\u11FF\u3130-\u318F]/ },
+  ja: { name: '日本語',    relevanceLang: 'ja', regionCode: 'JP', q: 'ショート',        langFilter: /[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFF]/ },
+  hi: { name: 'हिन्दी',   relevanceLang: 'hi', regionCode: 'IN', q: 'शॉर्ट्स',        langFilter: /[\u0900-\u097F]/ },
+  zh: { name: '中文',      relevanceLang: 'zh-TW', regionCode: 'TW', q: '短片',        langFilter: /[\u4E00-\u9FFF]/ },
+  ar: { name: 'العربية',  relevanceLang: 'ar', regionCode: 'SA', q: 'shorts',         langFilter: /[\u0600-\u06FF]/ },
+  th: { name: 'ภาษาไทย', relevanceLang: 'th', regionCode: 'TH', q: 'shorts',         langFilter: /[\u0E00-\u0E7F]/ },
+  en: { name: 'English',  relevanceLang: 'en', regionCode: 'US', q: 'shorts trending' },
+  fr: { name: 'Français', relevanceLang: 'fr', regionCode: 'FR', q: 'shorts tendance' },
+  de: { name: 'Deutsch',  relevanceLang: 'de', regionCode: 'DE', q: 'shorts trending' },
+  pt: { name: 'Português',relevanceLang: 'pt', regionCode: 'BR', q: 'shorts viral' },
+  es: { name: 'Español',  relevanceLang: 'es', regionCode: 'MX', q: 'shorts viral' },
+  id: { name: 'Indonesia',relevanceLang: 'id', regionCode: 'ID', q: 'shorts viral' },
 };
 
 // videos.list 아이템 → 쇼츠 객체 변환
@@ -610,6 +611,7 @@ function normalizeShortItem(item, source, region) {
 }
 
 // search.list로 쇼츠 ID 수집 → videos.list로 상세 조회
+// 403 quota 에러는 re-throw, 나머지 에러는 빈 배열 반환
 async function fetchPopularShorts(params, existingIds) {
   try {
     const searchRes = await axios.get('https://www.googleapis.com/youtube/v3/search', { params });
@@ -622,80 +624,118 @@ async function fetchPopularShorts(params, existingIds) {
       params: { part: 'snippet,statistics,contentDetails', id: ids.join(','), key: API_KEY },
     });
     return videoRes.data.items || [];
-  } catch { return []; }
+  } catch (err) {
+    if (err.response?.data?.error?.code === 403) throw err; // quota 에러는 위로 전파
+    return [];
+  }
 }
 
-// GET /api/trending-shorts?region=US&categoryId=
+// GET /api/trending-shorts?lang=ko&categoryId=
 app.get('/api/trending-shorts', async (req, res) => {
-  const region = (req.query.region || 'US').toUpperCase();
+  const lang = (req.query.lang || 'ko').toLowerCase();
   const categoryId = req.query.categoryId || '';
-  const MIN_RESULTS = 20; // 최소 목표 결과 수
-  const MAX_RESULTS = 30; // 최대 결과 수 (상한선)
+  const MIN_RESULTS = 24;
+  const MAX_RESULTS = 40;
 
-  const ALLOWED_REGIONS = Object.keys(REGION_META);
-  if (!ALLOWED_REGIONS.includes(region)) return res.status(400).json({ error: '지원하지 않는 국가입니다' });
+  if (!LANG_META[lang]) return res.status(400).json({ error: '지원하지 않는 언어입니다' });
 
-  const cacheKey = `trending_shorts:${region}:${categoryId}`;
+  const cacheKey = `trending_shorts:${lang}:${categoryId}`;
   if (cache.has(cacheKey)) return res.json(cache.get(cacheKey));
 
-  const meta = REGION_META[region];
+  const meta = LANG_META[lang];
   const seenIds = new Set();
   let allItems = [];
 
-  const addItems = (rawItems, source) => {
-    const filtered = rawItems
-      .map(item => normalizeShortItem(item, source, region))
-      .filter(v => v.durationSeconds > 0 && v.durationSeconds <= 180 && !seenIds.has(v.id));
-    const remaining = MAX_RESULTS - allItems.length;
-    const toAdd = filtered.slice(0, remaining);
+  // strict=true: langFilter 적용, strict=false: 필터 없이 채우기
+  const addItems = (rawItems, source, strict = true) => {
+    const normalized = rawItems
+      .map(item => normalizeShortItem(item, source, lang))
+      .filter(v => {
+        if (v.durationSeconds <= 0 || v.durationSeconds > 180) return false;
+        if (seenIds.has(v.id)) return false;
+        if (strict && meta.langFilter) {
+          const text = v.title + ' ' + v.channelTitle;
+          if (!meta.langFilter.test(text)) return false;
+        }
+        return true;
+      });
+    const toAdd = normalized.slice(0, MAX_RESULTS - allItems.length);
     toAdd.forEach(v => seenIds.add(v.id));
     allItems.push(...toAdd);
   };
 
+  const after30 = new Date(Date.now() -  30 * 24 * 60 * 60 * 1000).toISOString();
+  const after90 = new Date(Date.now() -  90 * 24 * 60 * 60 * 1000).toISOString();
+  const base = { part: 'snippet', type: 'video',
+                 videoDuration: 'short', relevanceLanguage: meta.relevanceLang,
+                 regionCode: meta.regionCode, order: 'viewCount', key: API_KEY };
+
+  let quotaExhausted = false;
+
   try {
-    // ── A: mostPopular + regionCode (국가별 실제 트렌딩) ──
-    const trendParams = {
-      part: 'snippet,statistics,contentDetails',
-      chart: 'mostPopular',
-      regionCode: region,
-      maxResults: 50,
-      key: API_KEY,
-    };
-    if (categoryId) trendParams.videoCategoryId = categoryId;
+    // ── A: mostPopular (트렌딩, videos.list = 1 유닛) ──
+    try {
+      const trendParams = {
+        part: 'snippet,statistics,contentDetails',
+        chart: 'mostPopular', regionCode: meta.regionCode, maxResults: 50, key: API_KEY,
+      };
+      if (categoryId) trendParams.videoCategoryId = categoryId;
+      const trendRes = await axios.get('https://www.googleapis.com/youtube/v3/videos', { params: trendParams });
+      addItems(trendRes.data.items || [], 'trending', true);
+    } catch (err) {
+      if (err.response?.data?.error?.code === 403) {
+        quotaExhausted = true;
+        console.warn('trending-shorts quota 소진 (A단계)');
+      } else {
+        throw err;
+      }
+    }
 
-    const trendRes = await axios.get('https://www.googleapis.com/youtube/v3/videos', { params: trendParams });
-    addItems(trendRes.data.items || [], 'trending');
+    // ── B: 최근 30일 + 키워드 검색 (search.list = 100 유닛) ──
+    if (!quotaExhausted && allItems.length < MIN_RESULTS) {
+      try {
+        const p = { ...base, q: meta.q, publishedAfter: after30, maxResults: 50 };
+        if (categoryId) p.videoCategoryId = categoryId;
+        addItems(await fetchPopularShorts(p, seenIds), 'popular', true);
+      } catch (err) {
+        if (err.response?.data?.error?.code === 403) {
+          quotaExhausted = true;
+          console.warn('trending-shorts quota 소진 (B단계)');
+        } else throw err;
+      }
+    }
 
-    // ── B~E: 부족할 때 단계별 조건 완화 ──
-    const publishedAfter30 = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
-    const publishedAfter90 = new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString();
+    // ── C: 최근 90일 검색 (search.list = 100 유닛) ──
+    if (!quotaExhausted && allItems.length < MIN_RESULTS) {
+      try {
+        const p = { ...base, q: meta.q, publishedAfter: after90, maxResults: 50 };
+        if (categoryId) p.videoCategoryId = categoryId;
+        addItems(await fetchPopularShorts(p, seenIds), 'popular', true);
+      } catch (err) {
+        if (err.response?.data?.error?.code === 403) {
+          quotaExhausted = true;
+          console.warn('trending-shorts quota 소진 (C단계)');
+        } else throw err;
+      }
+    }
 
-    const searchSteps = [
-      // B: regionCode + lang + q + 30일
-      { videoDuration: 'short', relevanceLanguage: meta.lang, regionCode: region,
-        q: meta.q, order: 'viewCount', publishedAfter: publishedAfter30, maxResults: 30 },
-      // C: regionCode 없이 lang + q (30일)
-      { videoDuration: 'short', relevanceLanguage: meta.lang,
-        q: meta.q, order: 'viewCount', publishedAfter: publishedAfter30, maxResults: 30 },
-      // D: 날짜 90일로 확장
-      { videoDuration: 'short', relevanceLanguage: meta.lang, regionCode: region,
-        q: meta.q, order: 'viewCount', publishedAfter: publishedAfter90, maxResults: 30 },
-      // E: 날짜·regionCode 모두 제거 (최후 수단)
-      { videoDuration: 'short', relevanceLanguage: meta.lang,
-        q: meta.q, order: 'viewCount', maxResults: 30 },
-    ];
-
-    for (const step of searchSteps) {
-      if (allItems.length >= MIN_RESULTS || allItems.length >= MAX_RESULTS) break;
-      const params = { part: 'snippet', type: 'video', key: API_KEY, ...step };
-      if (categoryId) params.videoCategoryId = categoryId;
-      const raw = await fetchPopularShorts(params, seenIds);
-      addItems(raw, 'popular');
+    // ── D: langFilter 없이 90일 보충 (strict=false, 최후 수단) ──
+    if (!quotaExhausted && allItems.length < 12) {
+      try {
+        const p = { ...base, publishedAfter: after90, maxResults: 50 };
+        addItems(await fetchPopularShorts(p, seenIds), 'popular', false);
+      } catch (err) {
+        if (err.response?.data?.error?.code === 403) {
+          quotaExhausted = true;
+          console.warn('trending-shorts quota 소진 (D단계)');
+        } else throw err;
+      }
     }
 
     const merged = allItems.sort((a, b) => b.viewCount - a.viewCount);
-    cache.set(cacheKey, merged, 1800);
-    res.json(merged);
+    const result = { items: merged, quotaExhausted };
+    cache.set(cacheKey, result, 3600); // 캐시 1시간 (쿼터 절약)
+    res.json(result);
   } catch (err) {
     console.error('trending-shorts 실패:', err.response?.data || err.message);
     res.status(500).json({ error: 'YouTube API 호출 실패' });

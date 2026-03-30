@@ -709,7 +709,7 @@ async function loadComments(videoId) {
 // 해외 급상승 쇼츠 페이지
 // ────────────────────────────────────────────
 function loadTrendingShorts() {
-  let currentRegion = 'US';
+  let currentLang = 'ko';
   let currentCat = '';
 
   const loading = document.getElementById('loading');
@@ -722,7 +722,7 @@ function loadTrendingShorts() {
     meta.textContent = '';
 
     try {
-      const params = new URLSearchParams({ region: currentRegion });
+      const params = new URLSearchParams({ lang: currentLang });
       if (currentCat) params.set('categoryId', currentCat);
 
       const res = await fetch(`/api/trending-shorts?${params}`);
@@ -730,15 +730,22 @@ function loadTrendingShorts() {
 
       loading.style.display = 'none';
 
-      if (!data.length) {
-        grid.innerHTML = '<p style="color:#aaa;text-align:center;padding:40px">해당 국가에서 쇼츠를 찾지 못했습니다.</p>';
+      const items = data.items || data; // 하위 호환
+
+      if (data.quotaExhausted && items.length === 0) {
+        grid.innerHTML = '<p style="color:#aaa;text-align:center;padding:40px">⚠️ YouTube API 할당량이 소진되었습니다.<br>한국시간 오후 4시 이후 다시 이용해주세요.</p>';
         return;
       }
 
-      const regionLabel = document.querySelector('.region-btn.active')?.dataset.label || currentRegion;
-      meta.textContent = `${regionLabel} 급상승 쇼츠 ${data.length}개`;
+      if (!items.length) {
+        grid.innerHTML = '<p style="color:#aaa;text-align:center;padding:40px">해당 언어 쇼츠를 찾지 못했습니다.</p>';
+        return;
+      }
 
-      grid.innerHTML = data.map(v => `
+      const langLabel = document.querySelector('.region-btn.active')?.dataset.label || currentLang;
+      meta.textContent = `${langLabel} 상승 쇼츠 ${items.length}개${data.quotaExhausted ? ' (일부 결과)' : ''}`;
+
+      grid.innerHTML = items.map(v => `
         <a class="shorts-card" href="/video.html?id=${v.id}&back=${encodeURIComponent(location.href)}" target="_blank">
           <div class="shorts-thumb-wrap">
             <img src="${v.thumbnail}" alt="${v.title}" loading="lazy">
@@ -763,12 +770,12 @@ function loadTrendingShorts() {
     }
   }
 
-  // 국가 탭
+  // 언어 탭
   document.querySelectorAll('.region-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.region-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      currentRegion = btn.dataset.region;
+      currentLang = btn.dataset.lang;
       fetchShortsTrending();
     });
   });
