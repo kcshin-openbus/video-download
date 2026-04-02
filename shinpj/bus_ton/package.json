@@ -1,0 +1,16 @@
+{
+  "name": "bus-ton-mp3-delivery",
+  "version": "1.0.0",
+  "description": "외국어 교재 MP3 자동 배달 서비스",
+  "private": true,
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd backend && npm run dev",
+    "client": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "install:all": "cd backend && npm install && cd ../frontend && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
