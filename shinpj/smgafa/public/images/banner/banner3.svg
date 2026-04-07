@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="800" viewBox="0 0 1920 800">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A6B3D"/>
+      <stop offset="100%" style="stop-color:#7DA06D"/>
+    </linearGradient>
+    <linearGradient id="heart3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF8A80"/>
+      <stop offset="100%" style="stop-color:#FF5252"/>
+    </linearGradient>
+    <radialGradient id="warmGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FFD97D;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#FFD97D;stop-opacity:0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1920" height="800" fill="url(#bg3)"/>
+
+  <!-- 따뜻한 글로우 -->
+  <circle cx="1400" cy="350" r="350" fill="url(#warmGlow)"/>
+
+  <!-- 장식 원 -->
+  <circle cx="200" cy="300" r="200" fill="#5A7D4D" opacity="0.3"/>
+  <circle cx="1750" cy="150" r="150" fill="#5A7D4D" opacity="0.25"/>
+
+  <!-- 큰 하트 (나눔 상징) - 우측 -->
+  <g transform="translate(1300, 200)" opacity="0.7">
+    <path d="M75 25 C75 0 0 0 0 50 C0 110 75 160 75 160 C75 160 150 110 150 50 C150 0 75 0 75 25Z" fill="url(#heart3)" opacity="0.5" transform="scale(1.5)"/>
+    <!-- 하트 안의 손 모양 -->
+    <g transform="translate(40, 55)" opacity="0.8">
+      <path d="M50 80 L50 40 Q50 25 40 25 Q30 25 30 40 L30 55 L25 40 Q22 28 15 30 Q8 32 12 45 L18 60 L10 50 Q5 42 0 46 Q-5 50 2 60 L15 75 Z" fill="#F5F0E8" transform="scale(1.4)"/>
+    </g>
+  </g>
+
+  <!-- 여러 사람들 (커뮤니티 상징) - 우측 하단 -->
+  <g transform="translate(1200, 430)" opacity="0.55">
+    <!-- 사람 1 -->
+    <g transform="translate(0, 0)">
+      <circle cx="0" cy="0" r="14" fill="#F5F0E8"/>
+      <path d="M0 14 L-4 50 L4 50Z" fill="#F5F0E8"/>
+      <line x1="-4" y1="50" x2="-8" y2="80" stroke="#F5F0E8" stroke-width="5" stroke-linecap="round"/>
+      <line x1="4" y1="50" x2="8" y2="80" stroke="#F5F0E8" stroke-width="5" stroke-linecap="round"/>
+    </g>
+    <!-- 사람 2 -->
+    <g transform="translate(40, -5)">
+      <circle cx="0" cy="0" r="14" fill="#F5F0E8"/>
+      <path d="M0 14 L-4 50 L4 50Z" fill="#F5F0E8"/>
+      <line x1="-4" y1="50" x2="-8" y2="80" stroke="#F5F0E8" stroke-width="5" stroke-linecap="round"/>
+      <line x1="4" y1="50" x2="8" y2="80" stroke="#F5F0E8" stroke-width="5" stroke-linecap="round"/>
+    </g>
+    <!-- 사람 3 (중앙, 약간 위) -->
+    <g transform="translate(20, -20)">
+      <circle cx="0" cy="0" r="16" fill="#FFD97D" opacity="0.8"/>
+      <path d="M0 16 L-5 55 L5 55Z" fill="#FFD97D" opacity="0.8"/>
+      <line x1="-5" y1="55" x2="-10" y2="88" stroke="#FFD97D" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+      <line x1="5" y1="55" x2="10" y2="88" stroke="#FFD97D" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+    </g>
+    <!-- 손 연결 -->
+    <line x1="8" y1="35" x2="12" y2="30" stroke="#F5F0E8" stroke-width="4" stroke-linecap="round"/>
+    <line x1="32" y1="30" x2="28" y2="35" stroke="#F5F0E8" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <!-- 동전/지폐 아이콘 (후원 상징) -->
+  <g transform="translate(1550, 350)" opacity="0.3">
+    <circle cx="0" cy="0" r="30" fill="#FFD97D"/>
+    <text x="0" y="8" text-anchor="middle" font-size="28" font-weight="bold" fill="#8B6914" font-family="serif">&#8361;</text>
+  </g>
+  <g transform="translate(1600, 420)" opacity="0.2">
+    <circle cx="0" cy="0" r="22" fill="#FFD97D"/>
+    <text x="0" y="6" text-anchor="middle" font-size="20" font-weight="bold" fill="#8B6914" font-family="serif">&#8361;</text>
+  </g>
+
+  <!-- 나뭇잎 장식 -->
+  <g transform="translate(150, 450) rotate(25)" opacity="0.18">
+    <ellipse cx="0" cy="0" rx="25" ry="55" fill="white"/>
+    <line x1="0" y1="-55" x2="0" y2="55" stroke="#4A6B3D" stroke-width="2"/>
+  </g>
+  <g transform="translate(250, 520) rotate(-15)" opacity="0.14">
+    <ellipse cx="0" cy="0" rx="20" ry="45" fill="white"/>
+    <line x1="0" y1="-45" x2="0" y2="45" stroke="#4A6B3D" stroke-width="2"/>
+  </g>
+  <g transform="translate(100, 550) rotate(40)" opacity="0.12">
+    <ellipse cx="0" cy="0" rx="15" ry="35" fill="white"/>
+  </g>
+
+  <!-- 작은 하트들 (떠다니는) -->
+  <g opacity="0.2">
+    <path d="M8 3 C8 0 16 0 16 5 C16 10 8 16 8 16 C8 16 0 10 0 5 C0 0 8 0 8 3Z" fill="white" transform="translate(350, 250) scale(1.2)"/>
+    <path d="M8 3 C8 0 16 0 16 5 C16 10 8 16 8 16 C8 16 0 10 0 5 C0 0 8 0 8 3Z" fill="white" transform="translate(1650, 550) scale(0.8)"/>
+    <path d="M8 3 C8 0 16 0 16 5 C16 10 8 16 8 16 C8 16 0 10 0 5 C0 0 8 0 8 3Z" fill="white" transform="translate(500, 180) scale(1)"/>
+  </g>
+
+  <!-- 리본/선물 상자 (나눔) -->
+  <g transform="translate(180, 250)" opacity="0.15">
+    <rect x="0" y="15" width="60" height="50" rx="5" fill="white"/>
+    <rect x="-5" y="10" width="70" height="15" rx="4" fill="white"/>
+    <line x1="30" y1="10" x2="30" y2="65" stroke="#4A6B3D" stroke-width="4"/>
+    <line x1="-5" y1="25" x2="65" y2="25" stroke="#4A6B3D" stroke-width="4"/>
+    <!-- 리본 -->
+    <path d="M30 10 Q15 -5 20 -15 Q25 -5 30 10" fill="#FF8A80" opacity="0.6"/>
+    <path d="M30 10 Q45 -5 40 -15 Q35 -5 30 10" fill="#FF8A80" opacity="0.6"/>
+  </g>
+
+  <!-- 하단 물결 -->
+  <path d="M0 710 Q320 680 640 720 Q960 760 1280 720 Q1600 680 1920 720 L1920 800 L0 800Z" fill="#4A6B3D" opacity="0.3"/>
+  <path d="M0 750 Q480 715 960 755 Q1440 800 1920 750 L1920 800 L0 800Z" fill="white" opacity="0.06"/>
+</svg>

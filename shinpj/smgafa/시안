@@ -1,0 +1,2198 @@
+{
+  "version": "2.10",
+  "children": [
+    {
+      "type": "frame",
+      "id": "w3nAR",
+      "x": 89,
+      "y": -170.47141403665057,
+      "name": "메인페이지 - Desktop 1440",
+      "rotation": 0.021031767701327017,
+      "width": 1440,
+      "fill": "#F5F3EEFF",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "Ws7um",
+          "name": "Header",
+          "width": "fill_container",
+          "height": 72,
+          "fill": "#FFFFFFFF",
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#00000008",
+            "offset": {
+              "x": 0,
+              "y": 2
+            },
+            "blur": 8
+          },
+          "padding": [
+            0,
+            80
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "0EzO7",
+              "name": "Logo",
+              "gap": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "dcCoF",
+                  "name": "logoCircle",
+                  "fill": "#2D5E3AFF",
+                  "width": 36,
+                  "height": 36
+                },
+                {
+                  "type": "frame",
+                  "id": "5CWjA",
+                  "name": "logoName",
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "3lcD6",
+                      "name": "logoLine1",
+                      "fill": "#2D5E3AFF",
+                      "content": "시민재가노인지원",
+                      "lineHeight": 1.3,
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "DSIE9",
+                      "name": "logoLine2",
+                      "fill": "#2D5E3AFF",
+                      "content": "서비스센터",
+                      "lineHeight": 1.3,
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "700"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "esvy9",
+              "name": "Nav Menu",
+              "gap": 32,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "e0RA8",
+                  "name": "nav1",
+                  "fill": "#1B3A28FF",
+                  "content": "센터소개",
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "KX3Zs",
+                  "name": "nav2",
+                  "fill": "#1B3A28FF",
+                  "content": "재가노인지원서비스사업",
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "XU2dr",
+                  "name": "nav3",
+                  "fill": "#1B3A28FF",
+                  "content": "후원·자원봉사",
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "Tf582",
+                  "name": "nav4",
+                  "fill": "#1B3A28FF",
+                  "content": "커뮤니티",
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "wbcdv",
+              "name": "themeBtn",
+              "width": 36,
+              "height": 36,
+              "fill": "#F5F3EEFF",
+              "cornerRadius": 9999,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "tBOct",
+                  "x": 10,
+                  "y": 10,
+                  "name": "themeIcon",
+                  "width": 16,
+                  "height": 16,
+                  "iconFontName": "moon",
+                  "iconFontFamily": "lucide",
+                  "fill": "#4A6B52FF"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "mJeD9",
+          "name": "Hero Banner - Slide 1/3",
+          "clip": true,
+          "width": "fill_container",
+          "height": 800,
+          "fill": {
+            "type": "image",
+            "enabled": true,
+            "url": "./public/images/banner/banner1.jpg",
+            "mode": "fill"
+          },
+          "layout": "vertical",
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "rectangle",
+              "id": "iAL2Y",
+              "layoutPosition": "absolute",
+              "x": -0.026796371753135872,
+              "y": 0.9999950818797032,
+              "name": "Overlay",
+              "fill": {
+                "type": "gradient",
+                "gradientType": "linear",
+                "enabled": true,
+                "rotation": 180,
+                "size": {
+                  "height": 1
+                },
+                "colors": [
+                  {
+                    "color": "#00000010",
+                    "position": 0
+                  },
+                  {
+                    "color": "#00000090",
+                    "position": 1
+                  }
+                ]
+              },
+              "width": 1440,
+              "height": 800
+            },
+            {
+              "type": "frame",
+              "id": "wAqbV",
+              "name": "Hero Content",
+              "width": 900,
+              "layout": "vertical",
+              "gap": 20,
+              "padding": [
+                0,
+                40
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "cshce",
+                  "name": "Hero Title",
+                  "fill": "#FFFFFFFF",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "어르신의 행복한 노후를 위한\n든든한 동반자",
+                  "lineHeight": 1.3,
+                  "textAlign": "center",
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 56,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "BRIlk",
+                  "name": "Hero Subtitle",
+                  "fill": "#FFFFFFBB",
+                  "content": "시민재가노인지원서비스센터가 함께합니다",
+                  "textAlign": "center",
+                  "fontFamily": "Inter",
+                  "fontSize": 20
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "f8Wcl",
+              "layoutPosition": "absolute",
+              "x": 24,
+              "y": 376,
+              "name": "Prev Arrow",
+              "width": 48,
+              "height": 48,
+              "fill": "#FFFFFF18",
+              "cornerRadius": 9999,
+              "stroke": {
+                "thickness": 1,
+                "fill": "#FFFFFF20"
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "sF2fM",
+                  "x": 14,
+                  "y": 14,
+                  "name": "leftArrowIcon",
+                  "width": 20,
+                  "height": 20,
+                  "iconFontName": "chevron-left",
+                  "iconFontFamily": "lucide",
+                  "fill": "#FFFFFFCC"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "zDZFw",
+              "layoutPosition": "absolute",
+              "x": 1368,
+              "y": 376,
+              "name": "Next Arrow",
+              "width": 48,
+              "height": 48,
+              "fill": "#FFFFFF18",
+              "cornerRadius": 9999,
+              "stroke": {
+                "thickness": 1,
+                "fill": "#FFFFFF20"
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "lq9sY",
+                  "x": 14,
+                  "y": 14,
+                  "name": "rightArrowIcon",
+                  "width": 20,
+                  "height": 20,
+                  "iconFontName": "chevron-right",
+                  "iconFontFamily": "lucide",
+                  "fill": "#FFFFFFCC"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ORxZo",
+              "layoutPosition": "absolute",
+              "x": 659.959621905577,
+              "y": 729.9999925891336,
+              "name": "Slide Indicators",
+              "gap": 6,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "rectangle",
+                  "cornerRadius": 9999,
+                  "id": "wu6il",
+                  "name": "Active Dot",
+                  "fill": "#FFFFFFFF",
+                  "width": 32,
+                  "height": 4
+                },
+                {
+                  "type": "rectangle",
+                  "cornerRadius": 9999,
+                  "id": "VWHeN",
+                  "name": "Dot 2",
+                  "fill": "#FFFFFF60",
+                  "width": 8,
+                  "height": 4
+                },
+                {
+                  "type": "rectangle",
+                  "cornerRadius": 9999,
+                  "id": "uFuVZ",
+                  "name": "Dot 3",
+                  "fill": "#FFFFFF60",
+                  "width": 8,
+                  "height": 4
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "32zgm",
+              "layoutPosition": "absolute",
+              "x": 594.6983925078798,
+              "y": 749.7631821885332,
+              "name": "Progress Bar",
+              "width": 200,
+              "height": 2,
+              "fill": "#FFFFFF20",
+              "cornerRadius": 9999,
+              "children": [
+                {
+                  "type": "rectangle",
+                  "cornerRadius": 9999,
+                  "id": "LLh9C",
+                  "name": "Progress Fill",
+                  "fill": "#FFFFFFBB",
+                  "width": 66,
+                  "height": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "0fKrj",
+          "name": "Services Section",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 40,
+          "padding": 80,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "Sxn3z",
+              "name": "Title Group",
+              "layout": "vertical",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "XO9mg",
+                  "name": "svcLabel",
+                  "fill": "#2D5E3AFF",
+                  "content": "Our Services",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "600",
+                  "letterSpacing": 3
+                },
+                {
+                  "type": "text",
+                  "id": "TXc8A",
+                  "name": "svcTitle",
+                  "fill": "#1B3A28FF",
+                  "content": "주요 서비스",
+                  "textAlign": "center",
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 42,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "TUcaD",
+                  "name": "svcDesc",
+                  "fill": "#4A6B52FF",
+                  "content": "어르신의 더 나은 삶을 위한 전문 서비스를 제공합니다",
+                  "textAlign": "center",
+                  "fontFamily": "Inter",
+                  "fontSize": 16
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "6BYmB",
+              "name": "Card Row",
+              "width": "fill_container",
+              "gap": 20,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "HpcPh",
+                  "name": "Card 센터소개",
+                  "width": "fill_container",
+                  "fill": "#FFFFFFFF",
+                  "cornerRadius": 12,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#00000008",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 20
+                  },
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": [
+                        12,
+                        12,
+                        0,
+                        0
+                      ],
+                      "id": "xhJq9",
+                      "name": "Card1 Bar",
+                      "fill": "#2D5E3AFF",
+                      "width": "fill_container",
+                      "height": 4
+                    },
+                    {
+                      "type": "frame",
+                      "id": "FyoWr",
+                      "name": "card1body",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 16,
+                      "padding": 24,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "FkHqM",
+                          "name": "card1icon",
+                          "width": 48,
+                          "height": 48,
+                          "fill": "#2D5E3A14",
+                          "cornerRadius": 12,
+                          "layout": "none",
+                          "children": [
+                            {
+                              "type": "icon_font",
+                              "id": "cQKw5",
+                              "x": 12,
+                              "y": 12,
+                              "name": "card1iconTxt",
+                              "width": 24,
+                              "height": 24,
+                              "iconFontName": "building-2",
+                              "iconFontFamily": "lucide",
+                              "fill": "#2D5E3AFF"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "mM2Gv",
+                          "name": "card1title",
+                          "fill": "#1B3A28FF",
+                          "content": "센터소개",
+                          "fontFamily": "Inter",
+                          "fontSize": 17,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "9jGWZ",
+                          "name": "card1desc",
+                          "fill": "#4A6B52FF",
+                          "content": "센터장 인사말, 미션과 비전,\n연혁, 조직도를 소개합니다",
+                          "lineHeight": 1.7,
+                          "fontFamily": "Inter",
+                          "fontSize": 13
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "SoVnK",
+                  "name": "card2",
+                  "width": "fill_container",
+                  "fill": "#FFFFFFFF",
+                  "cornerRadius": 12,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#00000008",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 20
+                  },
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": [
+                        12,
+                        12,
+                        0,
+                        0
+                      ],
+                      "id": "BOE3D",
+                      "name": "Card1 Bar",
+                      "fill": "#4A8C5EFF",
+                      "width": "fill_container",
+                      "height": 4
+                    },
+                    {
+                      "type": "frame",
+                      "id": "KQn3c",
+                      "name": "card1body",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 16,
+                      "padding": 24,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "HPqcI",
+                          "name": "card1icon",
+                          "width": 48,
+                          "height": 48,
+                          "fill": "#4A8C5E14",
+                          "cornerRadius": 12,
+                          "layout": "none",
+                          "children": [
+                            {
+                              "type": "icon_font",
+                              "id": "DPvbm",
+                              "x": 12,
+                              "y": 12,
+                              "name": "card1iconTxt",
+                              "width": 24,
+                              "height": 24,
+                              "iconFontName": "heart-handshake",
+                              "iconFontFamily": "lucide",
+                              "fill": "#4A8C5EFF"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "fn2c4",
+                          "name": "card1title",
+                          "fill": "#1B3A28FF",
+                          "content": "재가노인지원서비스",
+                          "fontFamily": "Inter",
+                          "fontSize": 17,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Ag1gd",
+                          "name": "card1desc",
+                          "fill": "#4A6B52FF",
+                          "content": "위기관리, 욕구기반서비스,\n신청절차를 안내합니다",
+                          "lineHeight": 1.7,
+                          "fontFamily": "Inter",
+                          "fontSize": 13
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "hCqQB",
+                  "name": "card3",
+                  "width": "fill_container",
+                  "fill": "#FFFFFFFF",
+                  "cornerRadius": 12,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#00000008",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 20
+                  },
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": [
+                        12,
+                        12,
+                        0,
+                        0
+                      ],
+                      "id": "ZjShw",
+                      "name": "Card1 Bar",
+                      "fill": "#8B6914FF",
+                      "width": "fill_container",
+                      "height": 4
+                    },
+                    {
+                      "type": "frame",
+                      "id": "VKz7c",
+                      "name": "card1body",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 16,
+                      "padding": 24,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "pbbiy",
+                          "name": "card1icon",
+                          "width": 48,
+                          "height": 48,
+                          "fill": "#8B691414",
+                          "cornerRadius": 12,
+                          "layout": "none",
+                          "children": [
+                            {
+                              "type": "icon_font",
+                              "id": "LVvco",
+                              "x": 12,
+                              "y": 12,
+                              "name": "card1iconTxt",
+                              "width": 24,
+                              "height": 24,
+                              "iconFontName": "gift",
+                              "iconFontFamily": "lucide",
+                              "fill": "#8B6914FF"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "6bbMY",
+                          "name": "card1title",
+                          "fill": "#1B3A28FF",
+                          "content": "후원 안내",
+                          "fontFamily": "Inter",
+                          "fontSize": 17,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "dF3Rn",
+                          "name": "card1desc",
+                          "fill": "#4A6B52FF",
+                          "content": "후원방법, 후원계좌,\n후원자 혜택을 안내합니다",
+                          "lineHeight": 1.7,
+                          "fontFamily": "Inter",
+                          "fontSize": 13
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "0oqJa",
+                  "name": "card4",
+                  "width": "fill_container",
+                  "fill": "#FFFFFFFF",
+                  "cornerRadius": 12,
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#00000008",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 20
+                  },
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": [
+                        12,
+                        12,
+                        0,
+                        0
+                      ],
+                      "id": "uf0wt",
+                      "name": "Card1 Bar",
+                      "fill": "#C17817FF",
+                      "width": "fill_container",
+                      "height": 4
+                    },
+                    {
+                      "type": "frame",
+                      "id": "EPC2q",
+                      "name": "card1body",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 16,
+                      "padding": 24,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "CFH9h",
+                          "name": "card1icon",
+                          "width": 48,
+                          "height": 48,
+                          "fill": "#C1781714",
+                          "cornerRadius": 12,
+                          "layout": "none",
+                          "children": [
+                            {
+                              "type": "icon_font",
+                              "id": "abEZj",
+                              "x": 12,
+                              "y": 12,
+                              "name": "card1iconTxt",
+                              "width": 24,
+                              "height": 24,
+                              "iconFontName": "users",
+                              "iconFontFamily": "lucide",
+                              "fill": "#C17817FF"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "s4VYp",
+                          "name": "card1title",
+                          "fill": "#1B3A28FF",
+                          "content": "자원봉사",
+                          "fontFamily": "Inter",
+                          "fontSize": 17,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "8weCg",
+                          "name": "card1desc",
+                          "fill": "#4A6B52FF",
+                          "content": "봉사자 모집, 활동내용,\n신청방법을 안내합니다",
+                          "lineHeight": 1.7,
+                          "fontFamily": "Inter",
+                          "fontSize": 13
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "EodsJ",
+          "name": "Notice Section",
+          "width": "fill_container",
+          "fill": "#F0EDE5FF",
+          "layout": "vertical",
+          "gap": 40,
+          "padding": 80,
+          "children": [
+            {
+              "type": "frame",
+              "id": "rJjhB",
+              "name": "Notice Header",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "ZBjEj",
+                  "name": "noticeLeft",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "6cLYc",
+                      "name": "noticeLabel",
+                      "fill": "#2D5E3AFF",
+                      "content": "News & Notice",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "600",
+                      "letterSpacing": 3
+                    },
+                    {
+                      "type": "text",
+                      "id": "eCelo",
+                      "name": "noticeTitle",
+                      "fill": "#1B3A28FF",
+                      "content": "최근 소식과 동향",
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 42,
+                      "fontWeight": "700"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "p4Aw5",
+                  "name": "noticeRight",
+                  "gap": 12,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "5viiG",
+                      "name": "tabContainer",
+                      "fill": "#FFFFFFFF",
+                      "cornerRadius": 9999,
+                      "stroke": {
+                        "thickness": 1,
+                        "fill": "#D6DDD0FF"
+                      },
+                      "gap": 4,
+                      "padding": 4,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "OHsqc",
+                          "name": "tab1",
+                          "fill": "#2D5E3AFF",
+                          "cornerRadius": 9999,
+                          "padding": [
+                            8,
+                            20
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "rwWaO",
+                              "name": "tab1txt",
+                              "fill": "#FFFFFFFF",
+                              "content": "공지사항",
+                              "fontFamily": "Inter",
+                              "fontSize": 13,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "YAbz3",
+                          "name": "tab2",
+                          "cornerRadius": 9999,
+                          "padding": [
+                            8,
+                            20
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "HsBZE",
+                              "name": "tab2txt",
+                              "fill": "#7A9A80FF",
+                              "content": "센터소식",
+                              "fontFamily": "Inter",
+                              "fontSize": 13,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "V21u0",
+                      "name": "arrowBtn",
+                      "width": 36,
+                      "height": 36,
+                      "cornerRadius": 9999,
+                      "stroke": {
+                        "thickness": 1,
+                        "fill": "#D6DDD0FF"
+                      },
+                      "layout": "none",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "llL9q",
+                          "x": 10,
+                          "y": 10,
+                          "name": "arrowIcon",
+                          "width": 16,
+                          "height": 16,
+                          "iconFontName": "arrow-right",
+                          "iconFontFamily": "lucide",
+                          "fill": "#4A6B52FF"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ZUYnU",
+              "name": "Notice Cards",
+              "width": "fill_container",
+              "gap": 20,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "53Xby",
+                  "name": "nc1",
+                  "width": "fill_container",
+                  "fill": "#FFFFFFFF",
+                  "cornerRadius": 12,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#D6DDD040"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#00000008",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 20
+                  },
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "8wBUa",
+                      "name": "nc1body",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "padding": 24,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "eoXqt",
+                          "name": "nc1badge",
+                          "fill": "#2D5E3AFF",
+                          "cornerRadius": 4,
+                          "padding": [
+                            4,
+                            10
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "lffS1",
+                              "name": "nc1badgeTxt",
+                              "fill": "#FFFFFFFF",
+                              "content": "공지사항",
+                              "fontFamily": "Inter",
+                              "fontSize": 11,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "ICzDT",
+                          "name": "nc1date",
+                          "fill": "#7A9A80FF",
+                          "content": "2025-03-15",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "n7Etu",
+                          "name": "nc1title",
+                          "fill": "#1B3A28FF",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "2025년 재가노인지원서비스 이용 안내",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 16,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "pooYt",
+                          "name": "nc1desc",
+                          "fill": "#4A6B52FF",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "시민재가노인지원서비스센터에서 제공하는 2025년도 서비스 이용 안내를 알려드립니다.",
+                          "lineHeight": 1.75,
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "yvE6f",
+                          "name": "nc1footer",
+                          "width": "fill_container",
+                          "stroke": {
+                            "thickness": {
+                              "top": 1
+                            },
+                            "fill": "#D6DDD040"
+                          },
+                          "padding": [
+                            12,
+                            0,
+                            0,
+                            0
+                          ],
+                          "justifyContent": "end",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "JV8PR",
+                              "name": "nc1arrow",
+                              "width": 28,
+                              "height": 28,
+                              "fill": "#F0EDE5FF",
+                              "cornerRadius": 9999,
+                              "layout": "none",
+                              "children": [
+                                {
+                                  "type": "icon_font",
+                                  "id": "wW6kP",
+                                  "x": 8,
+                                  "y": 8,
+                                  "name": "nc1arrowIcon",
+                                  "width": 12,
+                                  "height": 12,
+                                  "iconFontName": "arrow-right",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "#7A9A80FF"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "D3N2c",
+                  "name": "nc2",
+                  "width": "fill_container",
+                  "fill": "#FFFFFFFF",
+                  "cornerRadius": 12,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#D6DDD040"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#00000008",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 20
+                  },
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "RVuhF",
+                      "name": "nc1body",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "padding": 24,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "RGGAa",
+                          "name": "nc1badge",
+                          "fill": "#2D5E3AFF",
+                          "cornerRadius": 4,
+                          "padding": [
+                            4,
+                            10
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "UEhIV",
+                              "name": "nc1badgeTxt",
+                              "fill": "#FFFFFFFF",
+                              "content": "공지사항",
+                              "fontFamily": "Inter",
+                              "fontSize": 11,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "NrIad",
+                          "name": "nc1date",
+                          "fill": "#7A9A80FF",
+                          "content": "2025-02-28",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "HLNGP",
+                          "name": "nc1title",
+                          "fill": "#1B3A28FF",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "자원봉사자 모집 안내 (상시)",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 16,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "csv6r",
+                          "name": "nc1desc",
+                          "fill": "#4A6B52FF",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "지역사회 어르신들을 위한 따뜻한 나눔에 함께하실 자원봉사자를 모집합니다.",
+                          "lineHeight": 1.75,
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "YRChz",
+                          "name": "nc1footer",
+                          "width": "fill_container",
+                          "stroke": {
+                            "thickness": {
+                              "top": 1
+                            },
+                            "fill": "#D6DDD040"
+                          },
+                          "padding": [
+                            12,
+                            0,
+                            0,
+                            0
+                          ],
+                          "justifyContent": "end",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "hPDxU",
+                              "name": "nc1arrow",
+                              "width": 28,
+                              "height": 28,
+                              "fill": "#F0EDE5FF",
+                              "cornerRadius": 9999,
+                              "layout": "none",
+                              "children": [
+                                {
+                                  "type": "icon_font",
+                                  "id": "JSeu0",
+                                  "x": 8,
+                                  "y": 8,
+                                  "name": "nc1arrowIcon",
+                                  "width": 12,
+                                  "height": 12,
+                                  "iconFontName": "arrow-right",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "#7A9A80FF"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "MmU7z",
+                  "name": "nc3",
+                  "width": "fill_container",
+                  "fill": "#FFFFFFFF",
+                  "cornerRadius": 12,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#D6DDD040"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#00000008",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 20
+                  },
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "mE5FX",
+                      "name": "nc1body",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "padding": 24,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "WeSIk",
+                          "name": "nc1badge",
+                          "fill": "#2D5E3AFF",
+                          "cornerRadius": 4,
+                          "padding": [
+                            4,
+                            10
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "big7f",
+                              "name": "nc1badgeTxt",
+                              "fill": "#FFFFFFFF",
+                              "content": "공지사항",
+                              "fontFamily": "Inter",
+                              "fontSize": 11,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "pGiIM",
+                          "name": "nc1date",
+                          "fill": "#7A9A80FF",
+                          "content": "2025-02-20",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "3tZvy",
+                          "name": "nc1title",
+                          "fill": "#1B3A28FF",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "후원금 사용내역 공개 (2024년도)",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 16,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "gF1KA",
+                          "name": "nc1desc",
+                          "fill": "#4A6B52FF",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "2024년도 후원금 수입 및 사용내역을 투명하게 공개합니다.",
+                          "lineHeight": 1.75,
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "kp8nU",
+                          "name": "nc1footer",
+                          "width": "fill_container",
+                          "stroke": {
+                            "thickness": {
+                              "top": 1
+                            },
+                            "fill": "#D6DDD040"
+                          },
+                          "padding": [
+                            12,
+                            0,
+                            0,
+                            0
+                          ],
+                          "justifyContent": "end",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "S7CuJ",
+                              "name": "nc1arrow",
+                              "width": 28,
+                              "height": 28,
+                              "fill": "#F0EDE5FF",
+                              "cornerRadius": 9999,
+                              "layout": "none",
+                              "children": [
+                                {
+                                  "type": "icon_font",
+                                  "id": "xG0GW",
+                                  "x": 8,
+                                  "y": 8,
+                                  "name": "nc1arrowIcon",
+                                  "width": 12,
+                                  "height": 12,
+                                  "iconFontName": "arrow-right",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "#7A9A80FF"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "jgo6L",
+          "name": "Donation Banner",
+          "clip": true,
+          "width": "fill_container",
+          "height": 500,
+          "fill": {
+            "type": "image",
+            "enabled": true,
+            "url": "./public/images/donation-bg.jpg",
+            "mode": "fill"
+          },
+          "layout": "vertical",
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "rectangle",
+              "id": "cfouF",
+              "layoutPosition": "absolute",
+              "x": 0,
+              "y": 0,
+              "name": "donOverlay",
+              "fill": "#1B332688",
+              "width": 1440,
+              "height": 500
+            },
+            {
+              "type": "frame",
+              "id": "ew4Ne",
+              "name": "donContent",
+              "width": 600,
+              "layout": "vertical",
+              "gap": 20,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "eHjqH",
+                  "name": "donLabel",
+                  "fill": "#FFFFFF50",
+                  "content": "Donation",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "500",
+                  "letterSpacing": 4
+                },
+                {
+                  "type": "text",
+                  "id": "xGBEt",
+                  "name": "donTitle",
+                  "fill": "#FFFFFFFF",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "따뜻한 나눔에\n함께해 주세요",
+                  "lineHeight": 1.25,
+                  "textAlign": "center",
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 46,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "mPOvJ",
+                  "name": "donDesc",
+                  "fill": "#FFFFFF80",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "여러분의 작은 나눔이 어르신의 큰 행복이 됩니다.\n지역사회 어르신들의 안정된 노후를 위해 함께해 주세요.",
+                  "lineHeight": 1.85,
+                  "textAlign": "center",
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "2KrnX",
+                  "name": "donBtn",
+                  "fill": "#FFFFFFFF",
+                  "cornerRadius": 9999,
+                  "gap": 8,
+                  "padding": [
+                    16,
+                    36
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "pCRoJ",
+                      "name": "donBtnTxt",
+                      "fill": "#1B3326FF",
+                      "content": "후원 참여하기",
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "icon_font",
+                      "id": "CuEqh",
+                      "name": "donBtnArrow",
+                      "width": 16,
+                      "height": 16,
+                      "iconFontName": "arrow-right",
+                      "iconFontFamily": "lucide",
+                      "fill": "#1B3326FF"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "wBET4",
+          "name": "Location Section",
+          "width": "fill_container",
+          "fill": "#FFFFFFFF",
+          "layout": "vertical",
+          "gap": 40,
+          "padding": 80,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "31VL3",
+              "name": "locLabel",
+              "fill": "#2D5E3AFF",
+              "content": "Location",
+              "fontFamily": "Inter",
+              "fontSize": 13,
+              "fontWeight": "600",
+              "letterSpacing": 3
+            },
+            {
+              "type": "text",
+              "id": "JFlsD",
+              "name": "locTitle",
+              "fill": "#1B3A28FF",
+              "content": "찾아오시는 길",
+              "fontFamily": "Playfair Display",
+              "fontSize": 42,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "P9r7F",
+              "name": "locCards",
+              "width": "fill_container",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "5sx87",
+                  "name": "locCard1",
+                  "width": "fill_container",
+                  "fill": "#F5F3EEFF",
+                  "cornerRadius": 12,
+                  "gap": 16,
+                  "padding": 20,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "D3qCN",
+                      "name": "locIcon1",
+                      "width": 40,
+                      "height": 40,
+                      "fill": "#2D5E3A14",
+                      "cornerRadius": 8,
+                      "layout": "none",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "TKKPt",
+                          "x": 11,
+                          "y": 11,
+                          "name": "locIcon1i",
+                          "width": 18,
+                          "height": 18,
+                          "iconFontName": "map-pin",
+                          "iconFontFamily": "lucide",
+                          "fill": "#2D5E3AFF"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "YkXFj",
+                      "name": "locInfo1",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 2,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "EudQ6",
+                          "name": "locInfo1a",
+                          "fill": "#7A9A8099",
+                          "content": "주소",
+                          "fontFamily": "Inter",
+                          "fontSize": 11,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "zGa4L",
+                          "name": "locInfo1b",
+                          "fill": "#1B3A28FF",
+                          "content": "경기도 의정부시 경의로 42, 5층",
+                          "fontFamily": "Inter",
+                          "fontSize": 15,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "bTW7F",
+                  "name": "locCard2",
+                  "width": "fill_container",
+                  "fill": "#F5F3EEFF",
+                  "cornerRadius": 12,
+                  "gap": 16,
+                  "padding": 20,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "1cZfJ",
+                      "name": "locIcon1",
+                      "width": 40,
+                      "height": 40,
+                      "fill": "#2D5E3A14",
+                      "cornerRadius": 8,
+                      "layout": "none",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "vM5CK",
+                          "x": 11,
+                          "y": 11,
+                          "name": "locIcon1i",
+                          "width": 18,
+                          "height": 18,
+                          "iconFontName": "phone",
+                          "iconFontFamily": "lucide",
+                          "fill": "#2D5E3AFF"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "WbmLN",
+                      "name": "locInfo1",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 2,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Aj6gP",
+                          "name": "locInfo1a",
+                          "fill": "#7A9A8099",
+                          "content": "전화",
+                          "fontFamily": "Inter",
+                          "fontSize": 11,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "nPlhF",
+                          "name": "locInfo1b",
+                          "fill": "#1B3A28FF",
+                          "content": "031-873-3682",
+                          "fontFamily": "Inter",
+                          "fontSize": 15,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "UsyyA",
+                  "name": "locCard3",
+                  "width": "fill_container",
+                  "fill": "#F5F3EEFF",
+                  "cornerRadius": 12,
+                  "gap": 16,
+                  "padding": 20,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "UMzVZ",
+                      "name": "locIcon1",
+                      "width": 40,
+                      "height": 40,
+                      "fill": "#2D5E3A14",
+                      "cornerRadius": 8,
+                      "layout": "none",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "Yw73S",
+                          "x": 11,
+                          "y": 11,
+                          "name": "locIcon1i",
+                          "width": 18,
+                          "height": 18,
+                          "iconFontName": "printer",
+                          "iconFontFamily": "lucide",
+                          "fill": "#2D5E3AFF"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "hUwB3",
+                      "name": "locInfo1",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 2,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Lvg29",
+                          "name": "locInfo1a",
+                          "fill": "#7A9A8099",
+                          "content": "팩스",
+                          "fontFamily": "Inter",
+                          "fontSize": 11,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "n4RV2",
+                          "name": "locInfo1b",
+                          "fill": "#1B3A28FF",
+                          "content": "031-873-3678",
+                          "fontFamily": "Inter",
+                          "fontSize": 15,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "63QhL",
+              "name": "Map Placeholder",
+              "clip": true,
+              "width": "fill_container",
+              "height": 380,
+              "fill": "#E8E5DDFF",
+              "cornerRadius": 16,
+              "stroke": {
+                "thickness": 1,
+                "fill": "#D6DDD0FF"
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "TMfDK",
+                  "x": 616,
+                  "y": 160,
+                  "name": "mapIcon",
+                  "width": 48,
+                  "height": 48,
+                  "iconFontName": "map",
+                  "iconFontFamily": "lucide",
+                  "fill": "#7A9A80FF"
+                },
+                {
+                  "type": "text",
+                  "id": "VrdoA",
+                  "x": 595,
+                  "y": 220,
+                  "name": "mapLabel",
+                  "fill": "#7A9A8099",
+                  "content": "Google Map 영역",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "4KzLm",
+              "name": "locBtn",
+              "fill": "#2D5E3AFF",
+              "cornerRadius": 12,
+              "gap": 8,
+              "padding": [
+                14,
+                28
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "182uh",
+                  "name": "locBtnTxt",
+                  "fill": "#FFFFFFFF",
+                  "content": "자세히 보기",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "icon_font",
+                  "id": "Lp9di",
+                  "name": "locBtnArrow",
+                  "width": 14,
+                  "height": 14,
+                  "iconFontName": "arrow-right",
+                  "iconFontFamily": "lucide",
+                  "fill": "#FFFFFFFF"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "tbA1d",
+          "name": "Footer",
+          "width": "fill_container",
+          "fill": "#2A2A2AFF",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            48,
+            80
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "hjWJz",
+              "name": "footerTop",
+              "width": "fill_container",
+              "gap": 40,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "vOUmK",
+                  "name": "footerCol1",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "d6eIc",
+                      "name": "footerCol1Title",
+                      "fill": "#FFFFFFFF",
+                      "content": "시민재가노인지원서비스센터",
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "mkc4F",
+                      "name": "footerCol1Addr",
+                      "fill": "#FFFFFF99",
+                      "content": "주소 : 경기도 의정부시 경의로 42, 5층",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "0wsUF",
+                      "name": "footerCol1Tel",
+                      "fill": "#FFFFFF99",
+                      "content": "TEL : 031-873-3682",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Jdivd",
+                      "name": "footerCol1Fax",
+                      "fill": "#FFFFFF99",
+                      "content": "FAX : 031-873-3678",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "jsrho",
+                  "name": "footerCol2",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "J5d6U",
+                      "name": "footerCol2Title",
+                      "fill": "#FFFFFFFF",
+                      "content": "바로가기",
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "FPpnj",
+                      "name": "footerCol2a",
+                      "fill": "#FFFFFF99",
+                      "content": "센터소개",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "l3rh4",
+                      "name": "footerCol2b",
+                      "fill": "#FFFFFF99",
+                      "content": "재가노인지원서비스사업",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "HmZ1g",
+                      "name": "footerCol2c",
+                      "fill": "#FFFFFF99",
+                      "content": "후원 안내",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "tcHSJ",
+                      "name": "footerCol2d",
+                      "fill": "#FFFFFF99",
+                      "content": "자원봉사자 모집",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "dMm8s",
+                  "name": "footerCol3",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "G3Upa",
+                      "name": "footerCol3Title",
+                      "fill": "#FFFFFFFF",
+                      "content": "후원 계좌",
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "XzbJa",
+                      "name": "footerCol3Bank",
+                      "width": "fill_container",
+                      "fill": "#3A3A3AFF",
+                      "cornerRadius": 8,
+                      "layout": "vertical",
+                      "gap": 4,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "eTo5U",
+                          "name": "footerCol3Num",
+                          "fill": "#FFD97DFF",
+                          "content": "농협 351-5175-3317-63",
+                          "fontFamily": "Inter",
+                          "fontSize": 16,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "YEMfQ",
+                          "name": "footerCol3Name",
+                          "fill": "#FFFFFF66",
+                          "content": "시민재가노인지원서비스센터",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "4WQJc",
+              "name": "footerDivider",
+              "fill": "#FFFFFF15",
+              "width": "fill_container",
+              "height": 1
+            },
+            {
+              "type": "text",
+              "id": "51Vdm",
+              "name": "footerCopy",
+              "fill": "#FFFFFF50",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "© 2025 시민재가노인지원서비스센터. All rights reserved.",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "Tl8qz",
+      "x": 1702,
+      "y": 88,
+      "name": "Hero - Slide 2/3 (참고)",
+      "clip": true,
+      "width": 1440,
+      "height": 800,
+      "fill": {
+        "type": "image",
+        "enabled": true,
+        "url": "./public/images/banner/banner2.jpg",
+        "mode": "fill"
+      },
+      "layout": "vertical",
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "rectangle",
+          "id": "sRTmp",
+          "layoutPosition": "absolute",
+          "x": 0,
+          "y": 0,
+          "name": "slide2overlay",
+          "fill": {
+            "type": "gradient",
+            "gradientType": "linear",
+            "enabled": true,
+            "rotation": 180,
+            "size": {
+              "height": 1
+            },
+            "colors": [
+              {
+                "color": "#00000010",
+                "position": 0
+              },
+              {
+                "color": "#00000090",
+                "position": 1
+              }
+            ]
+          },
+          "width": 1440,
+          "height": 800
+        },
+        {
+          "type": "frame",
+          "id": "IbJxK",
+          "name": "slide2content",
+          "width": 900,
+          "layout": "vertical",
+          "gap": 20,
+          "padding": [
+            0,
+            40
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "VXUYc",
+              "name": "slide2title",
+              "fill": "#FFFFFFFF",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "맞춤형 재가노인지원서비스로\n어르신의 삶의 질을 높입니다",
+              "lineHeight": 1.3,
+              "textAlign": "center",
+              "fontFamily": "Playfair Display",
+              "fontSize": 56,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "bVt2X",
+              "name": "slide2sub",
+              "fill": "#FFFFFFBB",
+              "content": "통합적·포괄적 서비스를 제공합니다",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 20
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "ocyoM",
+      "x": 1702,
+      "y": 1021,
+      "name": "Hero - Slide 3/3 (참고)",
+      "clip": true,
+      "width": 1440,
+      "height": 800,
+      "fill": {
+        "type": "image",
+        "enabled": true,
+        "url": "./public/images/donation-bg.jpg",
+        "mode": "fill"
+      },
+      "layout": "vertical",
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "rectangle",
+          "id": "jnvc4",
+          "layoutPosition": "absolute",
+          "x": 0,
+          "y": 0,
+          "name": "slide3overlay",
+          "fill": {
+            "type": "gradient",
+            "gradientType": "linear",
+            "enabled": true,
+            "rotation": 180,
+            "size": {
+              "height": 1
+            },
+            "colors": [
+              {
+                "color": "#00000010",
+                "position": 0
+              },
+              {
+                "color": "#00000090",
+                "position": 1
+              }
+            ]
+          },
+          "width": 1440,
+          "height": 800
+        },
+        {
+          "type": "frame",
+          "id": "sLoBe",
+          "name": "slide3content",
+          "width": 900,
+          "layout": "vertical",
+          "gap": 20,
+          "padding": [
+            0,
+            40
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "7PdXP",
+              "name": "slide3title",
+              "fill": "#FFFFFFFF",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "따뜻한 나눔으로\n함께 만드는 복지공동체",
+              "lineHeight": 1.3,
+              "textAlign": "center",
+              "fontFamily": "Playfair Display",
+              "fontSize": 56,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "s1xXe",
+              "name": "slide3sub",
+              "fill": "#FFFFFFBB",
+              "content": "여러분의 작은 관심이 큰 행복이 됩니다",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 20
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

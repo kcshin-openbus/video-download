@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="800" viewBox="0 0 1920 800">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3A6B50"/>
+      <stop offset="100%" style="stop-color:#5A9E6F"/>
+    </linearGradient>
+    <linearGradient id="doc" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#F0EBE0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="800" fill="url(#bg2)"/>
+
+  <!-- 부드러운 원형 장식 -->
+  <circle cx="250" cy="200" r="300" fill="#4A8060" opacity="0.3"/>
+  <circle cx="1700" cy="600" r="250" fill="#4A8060" opacity="0.25"/>
+
+  <!-- 클립보드 (서비스 상징) - 우측 -->
+  <g transform="translate(1280, 220)" opacity="0.8">
+    <!-- 클립보드 본체 -->
+    <rect x="0" y="20" width="160" height="210" rx="12" fill="url(#doc)" opacity="0.9"/>
+    <!-- 클립 -->
+    <rect x="50" y="5" width="60" height="30" rx="8" fill="#8B7355" opacity="0.7"/>
+    <!-- 체크리스트 -->
+    <g transform="translate(25, 60)">
+      <rect x="0" y="0" width="16" height="16" rx="3" fill="#4A7C59" opacity="0.5"/>
+      <path d="M3 8 L7 12 L13 4" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <rect x="28" y="3" width="80" height="10" rx="3" fill="#C4B99A" opacity="0.5"/>
+
+      <rect x="0" y="35" width="16" height="16" rx="3" fill="#4A7C59" opacity="0.5"/>
+      <path d="M3 43 L7 47 L13 39" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <rect x="28" y="38" width="65" height="10" rx="3" fill="#C4B99A" opacity="0.5"/>
+
+      <rect x="0" y="70" width="16" height="16" rx="3" fill="#4A7C59" opacity="0.5"/>
+      <path d="M3 78 L7 82 L13 74" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <rect x="28" y="73" width="75" height="10" rx="3" fill="#C4B99A" opacity="0.5"/>
+
+      <rect x="0" y="105" width="16" height="16" rx="3" fill="#D4C5A9" opacity="0.4"/>
+      <rect x="28" y="108" width="55" height="10" rx="3" fill="#C4B99A" opacity="0.3"/>
+    </g>
+  </g>
+
+  <!-- 돌봄 사회복지사 + 어르신 실루엣 -->
+  <g transform="translate(1500, 280)" opacity="0.65">
+    <!-- 사회복지사 -->
+    <circle cx="0" cy="0" r="20" fill="#F5F0E8"/>
+    <path d="M0 20 Q-3 35 -8 65 L8 65 Q3 35 0 20Z" fill="#F5F0E8"/>
+    <line x1="-8" y1="65" x2="-14" y2="110" stroke="#F5F0E8" stroke-width="7" stroke-linecap="round"/>
+    <line x1="8" y1="65" x2="14" y2="110" stroke="#F5F0E8" stroke-width="7" stroke-linecap="round"/>
+    <!-- 손 내밀기 -->
+    <line x1="10" y1="40" x2="35" y2="50" stroke="#F5F0E8" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- 어르신 (의자에 앉은) -->
+    <g transform="translate(55, 20)">
+      <circle cx="0" cy="0" r="16" fill="#F5F0E8"/>
+      <path d="M0 16 Q0 28 -5 50 L5 50 Q10 28 0 16Z" fill="#F5F0E8"/>
+      <line x1="-5" y1="50" x2="-10" y2="80" stroke="#F5F0E8" stroke-width="6" stroke-linecap="round"/>
+      <line x1="5" y1="50" x2="10" y2="80" stroke="#F5F0E8" stroke-width="6" stroke-linecap="round"/>
+      <!-- 손 맞잡기 -->
+      <line x1="-10" y1="38" x2="-25" y2="32" stroke="#F5F0E8" stroke-width="5" stroke-linecap="round"/>
+    </g>
+
+    <!-- 하트 -->
+    <g transform="translate(25, -20)">
+      <path d="M8 3 C8 0 16 0 16 5 C16 10 8 16 8 16 C8 16 0 10 0 5 C0 0 8 0 8 3Z" fill="#FF8A80" opacity="0.6" transform="scale(1.5)"/>
+    </g>
+  </g>
+
+  <!-- 청진기 아이콘 (건강관리 상징) - 좌측 -->
+  <g transform="translate(180, 350)" opacity="0.2">
+    <circle cx="50" cy="0" r="30" fill="none" stroke="white" stroke-width="6"/>
+    <path d="M20 0 Q0 0 0 30 L0 100 Q0 140 40 140 L60 140 Q100 140 100 100 L100 50" fill="none" stroke="white" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="100" cy="35" r="10" fill="white"/>
+  </g>
+
+  <!-- 전화기 아이콘 (상담 상징) - 좌측 하단 -->
+  <g transform="translate(120, 520)" opacity="0.15">
+    <path d="M10 0 L35 0 Q45 0 45 10 L45 70 Q45 80 35 80 L10 80 Q0 80 0 70 L0 10 Q0 0 10 0Z" fill="white" transform="scale(1.8)"/>
+    <circle cx="40" cy="120" r="8" fill="none" stroke="#3A6B50" stroke-width="3"/>
+  </g>
+
+  <!-- 작은 + 기호들 (의료/복지) -->
+  <g opacity="0.15">
+    <g transform="translate(300, 180)">
+      <line x1="-10" y1="0" x2="10" y2="0" stroke="white" stroke-width="4" stroke-linecap="round"/>
+      <line x1="0" y1="-10" x2="0" y2="10" stroke="white" stroke-width="4" stroke-linecap="round"/>
+    </g>
+    <g transform="translate(1700, 200)">
+      <line x1="-8" y1="0" x2="8" y2="0" stroke="white" stroke-width="3" stroke-linecap="round"/>
+      <line x1="0" y1="-8" x2="0" y2="8" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    </g>
+    <g transform="translate(400, 550)">
+      <line x1="-6" y1="0" x2="6" y2="0" stroke="white" stroke-width="3" stroke-linecap="round"/>
+      <line x1="0" y1="-6" x2="0" y2="6" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <!-- 하단 물결 -->
+  <path d="M0 720 Q320 690 640 730 Q960 770 1280 730 Q1600 690 1920 730 L1920 800 L0 800Z" fill="#3A6B50" opacity="0.3"/>
+  <path d="M0 755 Q480 720 960 760 Q1440 800 1920 755 L1920 800 L0 800Z" fill="white" opacity="0.06"/>
+</svg>
